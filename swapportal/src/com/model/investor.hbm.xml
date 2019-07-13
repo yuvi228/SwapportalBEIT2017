@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+        <hibernate-mapping package="com.model">
+        
+        <class name="Investor" table="investor">
+        
+        
+        <id column="iid" name="iid">
+        <generator class="increment"></generator>
+        </id>
+        <property name="id" column="id"></property>
+        <property name="type" column="type"></property>
+       
+        <property name="areaofinterest" column="areaofinterest"></property>
+        <property name="investingamount" column="investingamount"></property>
+        <property name="logo" column="logo"></property>
+        <property name="address1" column="address1"></property>
+        <property name="address2" column="address2"></property>
+        <property name="street" column="street"></property>
+   	  	<property name="city" column="city"></property>
+   	  	<property name="country" column="country"></property>
+        <property name="map" column="map"></property>
+        <property name="fb" column="fb"></property>
+        <property name="tw" column="tw"></property>
+        <property name="gg" column="gg"></property>
+        
+     
+        </class>        
+        
+        
+        </hibernate-mapping>
