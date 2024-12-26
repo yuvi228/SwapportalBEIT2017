@@ -16,7 +16,7 @@
 				inve = (Investor)it.next();
    			%>
    				<%
-   				List<Register> regg = (List<Register>) session.getAttribute("Userbyid");
+   				List<Register> regg = (List<Register>) session.getAttribute("User");
    				%>
    				<%
    					if(!regg.isEmpty() && regg!= null){

@@ -225,7 +225,7 @@
 				<div class="image">
 					<div class="content">
 						<%
-							Integer id = inv.getIid();
+							Integer id = inv.getId();
 						%>
 <!-- 						<img -->
 <%-- 							src="<%=request.getContextPath()%>/wp-content/Frontend/getallinvestorImage.jsp?id=<%=id%>" --%>

@@ -55,8 +55,8 @@
 <link href="<%=request.getContextPath()%>/css/owl.theme.css"
 	rel="stylesheet" type="text/css" media="screen">
 <!--mega menu -->
-<link href="<%=request.getContextPath()%>/css/yamm.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/yamm.css" rel="stylesheet"
+	type="text/css">
 <!--cube css-->
 <link
 	href="<%=request.getContextPath()%>/cubeportfolio/css/cubeportfolio.min.css"
@@ -203,49 +203,54 @@
 			<li><a
 				href="<%=request.getContextPath()%>/Controller?actionCode=getfeedback&id=<%=regi.getId()%>"><i
 					class="fa fa-search"></i> Feedback</a></li>
-			
+
 		</ul>
 
 	</div>
 
 	<div class="col-md-9">
 		<h3 class="title-section">Idea Proposals</h3>
-		
+
 		<div class="row property-listing">
 			<div class="col-sm-4 margin30">
 				<div class="image">
 					<div class="content">
 						<%
-							Integer id = regi.getId();
+						Integer id = regi.getId();
 						%>
-<!-- 						<img -->
-<%-- 							src="<%=request.getContextPath()%>/wp-content/Frontend/getallideapersonImage.jsp?id=<%=id%>" --%>
-<!-- 							style="width: 150px; height: 150px; margin: 0px auto;" -->
-<!-- 							class="img-responsive" alt=""> <br /> -->
-							
-							<img
-							src="<%=request.getContextPath()%>/FileUploadDBServlet?actionCode=getallinvestorImage&?id=<%=id%>"
+						<!-- 						<img -->
+						<%-- 							src="<%=request.getContextPath()%>/wp-content/Frontend/getallideapersonImage.jsp?id=<%=id%>" --%>
+						<!-- 							style="width: 150px; height: 150px; margin: 0px auto;" -->
+						<!-- 							class="img-responsive" alt=""> <br /> -->
+
+						<%
+						if (id != null) {
+						%>
+						<img
+							src="<%=request.getContextPath()%>/FileUploadDBServlet?actionCode=getallinvestorImage&id=<%=id%>"
 							style="width: 150px; height: 150px; margin: 0px auto;"
-							class="img-responsive" alt=""> <br />
-						<br />
+							class="img-responsive" alt="">
 						<%
-				}
-				}
-			%>
+						}
+						%>
+						<br /> <br />
 						<%
-			if (!post.isEmpty() && post != null) {
-				Iterator<Ideaperson> it = post.iterator();
-				Ideaperson pos = null;
-				while (it.hasNext()) {
-					pos = (Ideaperson) it.next();
-		%>
+						}
+						}
+						%>
+						<%
+						if (!post.isEmpty() && post != null) {
+							Iterator<Ideaperson> it = post.iterator();
+							Ideaperson pos = null;
+							while (it.hasNext()) {
+								pos = (Ideaperson) it.next();
+						%>
 						<div class="profile-controls">
 							<a href="<%=pos.getTw()%>" class="profile-control-left twitter"><span
 								class="fa fa-twitter fa-2x"></span></a>&nbsp; &nbsp;&nbsp; <a
 								href="<%=pos.getFb()%>" class="profile-control-center facebook"><span
 								class="fa fa-facebook fa-2x"></span></a>&nbsp; &nbsp;&nbsp; <a
-								href="<%=pos.getGg()%>"
-								class="profile-control-right googleplus"><span
+								href="<%=pos.getGg()%>" class="profile-control-right googleplus"><span
 								class="fa fa-google-plus fa-2x"></span></a>
 						</div>
 
@@ -291,8 +296,8 @@
 		<!--property listing row-->
 
 		<%
-			}
-			}
+		}
+		}
 		%>
 
 	</div>
@@ -309,15 +314,13 @@
 	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"
 		type="text/javascript"></script>
 	<!--easing plugin for smooth scroll-->
-	<script
-		src="<%=request.getContextPath()%>/js/jquery.easing.1.3.min.js"
+	<script src="<%=request.getContextPath()%>/js/jquery.easing.1.3.min.js"
 		type="text/javascript"></script>
 	<!--sticky header-->
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/jquery.sticky.js"></script>
 	<!--flex slider plugin-->
-	<script
-		src="<%=request.getContextPath()%>/js/jquery.flexslider-min.js"
+	<script src="<%=request.getContextPath()%>/js/jquery.flexslider-min.js"
 		type="text/javascript"></script>
 	<!--parallax background plugin-->
 	<script src="<%=request.getContextPath()%>/js/jquery.stellar.min.js"

@@ -1,21 +1,13 @@
 package com.dao;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
-
+import org.hibernate.query.Query;
 import com.model.Feedback;
 import com.model.Ideaperson;
 import com.model.Investor;
-//import com.util.HibernateUtil;
-
 import com.model.Post;
 import com.model.Register;
 import com.util.Util;
@@ -26,56 +18,41 @@ public class Dao {
 	Session session = null;
 	Transaction tx = null;
 
-	// only register can login start
-
 	public boolean register(Register reg) {
-		session = sessionfactory.openSession();
-		if (isUserExists(reg))
-			return false;
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.save(reg);
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
+		try (Session session = sessionfactory.openSession()) {
+			if (isUserExists(session, reg.getEmail())) {
+				return false; // User already exists
 			}
-			e.printStackTrace();
-		} finally {
-			// session.close();
+			Transaction tx = null;
+			try {
+				tx = session.beginTransaction();
+				session.save(reg);
+				tx.commit();
+				return true; // User registered successfully
+			} catch (Exception e) {
+				if (tx != null) {
+					tx.rollback();
+				}
+				System.out.println("Error occurred while registering user" + e);
+				throw e;
+			}
 		}
-		return true;
 	}
 
-	public boolean isUserExists(Register reg) {
-
-		session = sessionfactory.openSession();
-		boolean result = false;
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			Query query = session.createQuery("from Register where email='" + reg.getEmail() + "'");
-			reg = (Register) query.uniqueResult();
-			tx.commit();
-			if (reg != null)
-				result = true;
-		} catch (Exception ex) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			// session.close();
-		}
-		return result;
+	public boolean isUserExists(Session session, String email) {
+		String hql = "select count(*) from Register where email = :email";
+		Long count = (Long) session.createQuery(hql).setParameter("email", email).uniqueResult();
+		return count > 0;
 	}
 
 	// Get All User(Register Table)data
 	public List<Register> doloadRegister() {
 		session = sessionfactory.openSession();
 		try {
-			List<Register> registrationlist = session.createCriteria(Register.class).list();
-			return registrationlist;
+			String hql = "FROM Register"; // HQL equivalent of SELECT * FROM Register
+			Query<Register> query = session.createQuery(hql, Register.class);
+			return query.list();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,8 +67,9 @@ public class Dao {
 	public List<Post> doloadPost() {
 		session = sessionfactory.openSession();
 		try {
-			List<Post> postlist = session.createCriteria(Post.class).list();
-			return postlist;
+			String hql = "FROM Post"; // HQL equivalent of SELECT * FROM Post
+			Query<Post> query = session.createQuery(hql, Post.class);
+			return query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,8 +84,9 @@ public class Dao {
 	public List<Feedback> doloadFeedback() {
 		session = sessionfactory.openSession();
 		try {
-			List<Feedback> feedbacklist = session.createCriteria(Feedback.class).list();
-			return feedbacklist;
+			String hql = "FROM Feedback"; // HQL equivalent of SELECT * FROM Feedback
+			Query<Feedback> query = session.createQuery(hql, Feedback.class);
+			return query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -122,8 +101,11 @@ public class Dao {
 	public List<Investor> doloadInvestor() {
 		session = sessionfactory.openSession();
 		try {
-			List<Investor> investorlist = session.createCriteria(Investor.class).list();
-			return investorlist;
+
+			String hql = "FROM Investor"; // HQL equivalent of SELECT * FROM Investor
+			Query<Investor> query = session.createQuery(hql, Investor.class);
+			return query.list();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -138,8 +120,10 @@ public class Dao {
 	public List<Ideaperson> doloadIdeaperson() {
 		session = sessionfactory.openSession();
 		try {
-			List<Ideaperson> ideapersonlist = session.createCriteria(Ideaperson.class).list();
-			return ideapersonlist;
+			String hql = "FROM Ideaperson"; // HQL equivalent of SELECT * FROM Ideaperson
+			Query<Ideaperson> query = session.createQuery(hql, Ideaperson.class);
+			return query.list();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,6 +170,7 @@ public class Dao {
 			session.close();
 		}
 	}
+
 	// Ideaperson
 	// Post
 	public Integer doaddPost(Post post) {
@@ -345,8 +330,10 @@ public class Dao {
 	public List<Register> getRegisterData(Integer id) {
 		session = sessionfactory.openSession();
 		try {
-			List<Register> reg = session.createCriteria(Register.class).add(Restrictions.eq("id", id)).list();
-			return reg;
+			String hql = "FROM Register r WHERE r.id = :id";
+			Query<Register> query = session.createQuery(hql, Register.class);
+			query.setParameter("id", id);
+			return query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -359,8 +346,10 @@ public class Dao {
 	public List<Post> getpostById(Integer id) {
 		session = sessionfactory.openSession();
 		try {
-			List<Post> reg = session.createCriteria(Post.class).add(Restrictions.eq("id", id)).list();
-			return reg;
+			String hql = "FROM Post r WHERE r.id = :id";
+			Query<Post> query = session.createQuery(hql, Post.class);
+			query.setParameter("id", id);
+			return query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -373,8 +362,10 @@ public class Dao {
 	public List<Investor> getInvestorById(Integer id) {
 		session = sessionfactory.openSession();
 		try {
-			List<Investor> reg = session.createCriteria(Investor.class).add(Restrictions.eq("id", id)).list();
-			return reg;
+			String hql = "FROM Investor r WHERE r.id = :id";
+			Query<Investor> query = session.createQuery(hql, Investor.class);
+			query.setParameter("id", id);
+			return query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -387,8 +378,10 @@ public class Dao {
 	public List<Ideaperson> getIdeapersonById(Integer id) {
 		session = sessionfactory.openSession();
 		try {
-			List<Ideaperson> reg = session.createCriteria(Ideaperson.class).add(Restrictions.eq("id", id)).list();
-			return reg;
+			String hql = "FROM Ideaperson r WHERE r.id = :id";
+			Query<Ideaperson> query = session.createQuery(hql, Ideaperson.class);
+			query.setParameter("id", id);
+			return query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -401,8 +394,10 @@ public class Dao {
 	public List<Register> getUserBy(String email) {
 		session = sessionfactory.openSession();
 		try {
-			List<Register> reg = session.createCriteria(Register.class).add(Restrictions.eq("email", email)).list();
-			return reg;
+			String hql = "FROM Register r WHERE r.email = :email";
+			Query<Register> query = session.createQuery(hql, Register.class);
+			query.setParameter("email", email);
+			return query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -415,9 +410,11 @@ public class Dao {
 	public List<Ideaperson> getsearch(String city, String expfund) {
 		session = sessionfactory.openSession();
 		try {
-			List<Ideaperson> reg = session.createCriteria(Ideaperson.class).add(Restrictions.eq("city", city))
-					.add(Restrictions.eq("expectfund", expfund)).list();
-			return reg;
+			String hql = "FROM Ideaperson i WHERE i.city = :city AND i.expectfund = :expfund";
+			Query<Ideaperson> query = session.createQuery(hql, Ideaperson.class);
+			query.setParameter("city", city);
+			query.setParameter("expfund", expfund);
+			return query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -434,7 +431,8 @@ public class Dao {
 		Register reg = null;
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("from Register where id='" + id + "'");
+			Query query = session.createQuery("from Register where id = :id");
+			query.setParameter("id", id);
 			reg = (Register) query.uniqueResult();
 			tx.commit();
 		} catch (Exception e) {
@@ -456,7 +454,8 @@ public class Dao {
 		Register reg = null;
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("from Register where email='" + email + "'");
+			Query query = session.createQuery("from Register where email = :email");
+			query.setParameter("email", email);
 			reg = (Register) query.uniqueResult();
 			tx.commit();
 		} catch (Exception e) {
@@ -477,7 +476,8 @@ public class Dao {
 		Investor inv = null;
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("from Investor where id='" + id + "'");
+			Query query = session.createQuery("from Investor where id = :id");
+			query.setParameter("id", id);
 			inv = (Investor) query.uniqueResult();
 			tx.commit();
 		} catch (Exception e) {
@@ -498,7 +498,8 @@ public class Dao {
 		Ideaperson person = null;
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("from Ideaperson where id='" + id + "'");
+			Query query = session.createQuery("from Ideaperson where where id = :id");
+			query.setParameter("id", id);
 			person = (Ideaperson) query.uniqueResult();
 			tx.commit();
 		} catch (Exception e) {

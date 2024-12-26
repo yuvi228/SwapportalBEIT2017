@@ -1,4 +1,3 @@
-<%@page import="org.omg.CORBA.REBIND"%>
 <%@page import="com.model.Register"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.model.Ideaperson"%>

@@ -5,30 +5,29 @@ import org.hibernate.cfg.Configuration;
 
 public class Util {
 
-	private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static final SessionFactory sessionFactory = buildSessionFactory();
 
-	@SuppressWarnings("deprecation")
-	private static SessionFactory buildSessionFactory() {
-		
-		try {
-		
-			// Create the SessionFactory from hibernate.cfg.xml
-			return new Configuration().configure().buildSessionFactory();
-		
-		} catch (Throwable ex) {
-		
-			// Make sure you log the exception, as it might be swallowed
-			System.err.println("Initial SessionFactory creation failed." + ex);
-			throw new ExceptionInInitializerError(ex);
-		
-		}
-	
-	}
+    // Build the SessionFactory from hibernate.cfg.xml
+    private static SessionFactory buildSessionFactory() {
+        try {
+            // Create the SessionFactory from hibernate.cfg.xml
+            return new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            // Log the exception for better understanding of failure
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
 
-	public static SessionFactory getSessionFactory() {
-	
-		return sessionFactory;
-	
-	}
+    // Method to return the SessionFactory
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
+    // Add a shutdown method to close the session factory and release resources
+    public static void shutdown() {
+        if (sessionFactory != null) {
+            sessionFactory.close(); // Gracefully close the factory
+        }
+    }
 }

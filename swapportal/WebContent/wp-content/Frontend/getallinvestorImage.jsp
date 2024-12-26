@@ -14,7 +14,7 @@
 	Connection con = null;
 
 	try {
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection(connectionURL, user, pass);
 
 		PreparedStatement ps = con.prepareStatement("select logo from investor where id = ?");

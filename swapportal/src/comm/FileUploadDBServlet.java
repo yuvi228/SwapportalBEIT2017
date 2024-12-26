@@ -35,7 +35,7 @@ public class FileUploadDBServlet extends HttpServlet {
 	private String dbURL = "jdbc:mysql://localhost:3306/project";
 	private String dbUser = "root";
 	private String dbPass = "";
-	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -49,7 +49,7 @@ public class FileUploadDBServlet extends HttpServlet {
 			Connection con = null;
 
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 				con = DriverManager.getConnection(connectionURL, user, pass);
 
 				PreparedStatement ps = con.prepareStatement("select logo from investor where id = ?");
@@ -81,11 +81,9 @@ public class FileUploadDBServlet extends HttpServlet {
 				}
 			}
 		}
-		
-		
+
 		if (actioncode.equals("getallideapersonImage")) {
-			
-			
+
 			Integer id = Integer.parseInt(request.getParameter("id"));
 			String connectionURL = "jdbc:mysql://localhost:3306/project";
 			String user = "root";
@@ -94,7 +92,7 @@ public class FileUploadDBServlet extends HttpServlet {
 			Connection con = null;
 
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 				con = DriverManager.getConnection(connectionURL, user, pass);
 
 				PreparedStatement ps = con.prepareStatement("select photo from ideaperson where id = ?");
@@ -125,26 +123,18 @@ public class FileUploadDBServlet extends HttpServlet {
 					}
 				}
 			}
-			
-			
-			
-			
-			
-			
+
 		}
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// gets values of text fields
 		String actioncode = request.getParameter("actionCode");
 
-		
-		
-		
-		
 		// Add Investor
 		if (actioncode.equals("addInvestor")) {
-System.out.println("Add into addInvestor");
+			System.out.println("Add into addInvestor");
 			int result = 0;
 
 			Connection conn = null; // connection to the database
@@ -163,7 +153,7 @@ System.out.println("Add into addInvestor");
 			String fb = request.getParameter("fb");
 			String tw = request.getParameter("tw");
 			String gg = request.getParameter("gg");
-System.out.println("Get all data");
+			System.out.println("Get all data");
 			// InputStream inputStream = null; // input stream of the upload file
 
 			// obtains the upload file part in this multipart request
@@ -171,7 +161,7 @@ System.out.println("Get all data");
 			if (Part != null) {
 				try {
 					// connects to the database
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 					conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
 					// constructs SQL statement
@@ -183,7 +173,7 @@ System.out.println("Get all data");
 					statement.setString(3, areaofinterest);
 					statement.setString(4, investingamount);
 					statement.setBlob(5, is);
-					
+
 					statement.setString(6, adrs1);
 					statement.setString(7, adrs2);
 					statement.setString(8, street);
@@ -193,7 +183,6 @@ System.out.println("Get all data");
 					statement.setString(12, fb);
 					statement.setString(13, tw);
 					statement.setString(14, gg);
-					
 
 					result = statement.executeUpdate();
 
@@ -227,16 +216,14 @@ System.out.println("Get all data");
 			request.getSession(false).setAttribute("User", list);
 			request.getSession(false).setAttribute("invprofile", invprofile);
 			if (investor == true) {
-
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investorprofile.jsp");
-			} else {
-
 				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewinvestorprofile.jsp");
+			} else {
+				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investorprofile.jsp");
 			}
 		}
 
 		// Add Investor Closed
-		
+
 		// Upload Investor start
 		if (actioncode.equals("updateInvestor")) {
 
@@ -337,7 +324,7 @@ System.out.println("Get all data");
 		} // Update IDea person closed
 
 		// ADD ADDEAPERSON
-		if (actioncode.equals("addIdeaperson")) {	
+		if (actioncode.equals("addIdeaperson")) {
 			System.out.println("Add into addIdeaperson");
 			int result = 0;
 			Connection conn = null; // connection to the database
@@ -359,72 +346,71 @@ System.out.println("Get all data");
 			String gg = request.getParameter("gg");
 			System.out.println("Get all data");
 			// obtains the upload file part in this multipart request
-						Part Part = request.getPart("photo");
-						if (Part != null) {
-							try {
-								// connects to the database
-								Class.forName("com.mysql.jdbc.Driver");
-								conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+			Part Part = request.getPart("photo");
+			if (Part != null) {
+				try {
+					// connects to the database
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
-								// constructs SQL statement
-								String sql = "INSERT INTO ideaperson (id,type,photo,aboutyou,expectfund,projectabstract,address1,address2,street,city,country,map,fb,tw,gg) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-								PreparedStatement statement = conn.prepareStatement(sql);
-								InputStream is = Part.getInputStream();
-								statement.setInt(1, id);
-								statement.setString(2, type);
-								statement.setBlob(3, is);
-								statement.setString(4, aboutyou);
-								statement.setString(5, expfund);
-								statement.setString(6, projectabstract);
-								statement.setString(7, adrs1);
-								statement.setString(8, adrs2);
-								statement.setString(9, street);
-								statement.setString(10, city);
-								statement.setString(11, country);
-								statement.setString(12, map);
-								statement.setString(13, fb);
-								statement.setString(14, tw);
-								statement.setString(15, gg);
-								
+					// constructs SQL statement
+					String sql = "INSERT INTO ideaperson (id,type,photo,aboutyou,expectfund,projectabstract,address1,address2,street,city,country,map,fb,tw,gg) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					PreparedStatement statement = conn.prepareStatement(sql);
+					InputStream is = Part.getInputStream();
+					statement.setInt(1, id);
+					statement.setString(2, type);
+					statement.setBlob(3, is);
+					statement.setString(4, aboutyou);
+					statement.setString(5, expfund);
+					statement.setString(6, projectabstract);
+					statement.setString(7, adrs1);
+					statement.setString(8, adrs2);
+					statement.setString(9, street);
+					statement.setString(10, city);
+					statement.setString(11, country);
+					statement.setString(12, map);
+					statement.setString(13, fb);
+					statement.setString(14, tw);
+					statement.setString(15, gg);
 
-								result = statement.executeUpdate();
+					result = statement.executeUpdate();
 
-							} catch (SQLException | ClassNotFoundException e) {
+				} catch (SQLException | ClassNotFoundException e) {
 
-								e.printStackTrace();
-							} finally {
-								if (conn != null) {
-									// closes the database connection
-									try {
-										conn.close();
-									} catch (SQLException ex) {
-										ex.printStackTrace();
-									}
-								}
-
-							}
+					e.printStackTrace();
+				} finally {
+					if (conn != null) {
+						// closes the database connection
+						try {
+							conn.close();
+						} catch (SQLException ex) {
+							ex.printStackTrace();
 						}
-						if (result > 0) {
-							System.out.println("Uploaded");
-							// response.sendRedirect("result.jsp?message=Image+Uploaded");
-						} else {
-							System.out.println("error");
-							// response.sendRedirect("result.jsp?message=Some+Error+Occurred");
-						}
-						id = Integer.parseInt(request.getParameter("id"));
-						boolean ideaperson = dao.authenticateIdeaperson(id);
-						List<Register> list = dao.getRegisterData(id);
-						List<Ideaperson> ideaperson1 = dao.getIdeapersonById(id);
-						request.getSession(false).setAttribute("User", list);
-						request.getSession(false).setAttribute("Ideaperson", ideaperson1);
-						if (ideaperson == true) {
+					}
 
-							response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersonprofile.jsp");
-						} else {
+				}
+			}
+			if (result > 0) {
+				System.out.println("Uploaded");
+				// response.sendRedirect("result.jsp?message=Image+Uploaded");
+			} else {
+				System.out.println("error");
+				// response.sendRedirect("result.jsp?message=Some+Error+Occurred");
+			}
+			id = Integer.parseInt(request.getParameter("id"));
+			boolean ideaperson = dao.authenticateIdeaperson(id);
+			List<Register> list = dao.getRegisterData(id);
+			List<Ideaperson> ideaperson1 = dao.getIdeapersonById(id);
+			request.getSession(false).setAttribute("User", list);
+			request.getSession(false).setAttribute("Ideaperson", ideaperson1);
+			if (ideaperson == true) {
 
-							response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewideapersonprofile.jsp");
-						}
-			
+				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersonprofile.jsp");
+			} else {
+
+				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewideapersonprofile.jsp");
+			}
+
 		} // Add Idea person Closed
 	}
 }// Class Closed

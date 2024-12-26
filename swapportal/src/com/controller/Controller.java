@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import comm.EmailUtility;
 import com.dao.Dao;
 import com.model.Feedback;
@@ -16,7 +18,6 @@ import com.model.Ideaperson;
 import com.model.Investor;
 import com.model.Post;
 import com.model.Register;
-
 
 public class Controller extends HttpServlet {
 	Dao dao = new Dao();
@@ -39,12 +40,6 @@ public class Controller extends HttpServlet {
 	}
 	// SEND EMAIL END
 
-	List<Register> alluser = dao.doloadRegister();
-	List<Investor> allinvestor = dao.doloadInvestor();
-	List<Ideaperson> allideaperson = dao.doloadIdeaperson();
-	List<Post> allPost = dao.doloadPost();
-	List<Feedback> allfeedback = dao.doloadFeedback();
-
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -52,49 +47,57 @@ public class Controller extends HttpServlet {
 		Integer id = null;
 		String actioncode = request.getParameter("actionCode");
 
-		request.getSession(false).setAttribute("Registration", alluser);
+		// List<Register> alluser = dao.doloadRegister();
 
-		request.getSession(false).setAttribute("Investor", allinvestor);
+		HttpSession session = request.getSession();
 
-		request.getSession(false).setAttribute("Ideaperson", allideaperson);
+		final String basePath = request.getContextPath() + "/wp-content/Frontend/";
 
-		request.getSession(false).setAttribute("Post", allPost);
-
-		request.getSession(false).setAttribute("Feedback", allfeedback);
+		if (actioncode.equals("logout")) {
+			request.getSession().invalidate();
+			response.sendRedirect(basePath + "userlogin.jsp");
+		}
 
 		// Get All Feedback
 		if (actioncode.equals("getallfeedback")) {
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/feedbackdetails.jsp");
+			List<Feedback> allfeedback = dao.doloadFeedback();
+			session.setAttribute("Feedback", allfeedback);
+			response.sendRedirect(basePath + "feedbackdetails.jsp");
 		}
 
 		// Get all Post Table Data
 		if (actioncode.equals("getallIdea")) {
-
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideadetails.jsp");
+			List<Post> allPost = dao.doloadPost();
+			session.setAttribute("Post", allPost);
+			response.sendRedirect(basePath + "ideadetails.jsp");
 		}
 
 		// Get all Investor Table data
 		if (actioncode.equals("getallInvestor")) {
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investorprofiledetails.jsp");
+			List<Investor> allinvestor = dao.doloadInvestor();
+			session.setAttribute("Investor", allinvestor);
+			response.sendRedirect(basePath + "investorprofiledetails.jsp");
 		}
 
 		// Get all Ideaperson Table data
 		if (actioncode.equals("getallIdeaperson")) {
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersonprofiledata.jsp");
+			List<Ideaperson> allideaperson = dao.doloadIdeaperson();
+			session.setAttribute("Ideaperson", allideaperson);
+			response.sendRedirect(basePath + "ideapersonprofiledata.jsp");
 		}
 
 		// Get all User data
 		if (actioncode.equals("getalluser")) {
-
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/registerdetails.jsp");
+			List<Register> alluser = dao.doloadRegister();
+			session.setAttribute("Registration", alluser);
+			response.sendRedirect(basePath + "registerdetails.jsp");
 		}
 
 		if (actioncode.equals("updateuserData")) {
-
 			id = Integer.parseInt(request.getParameter("id"));
 			List<Register> userbyid = dao.getRegisterData(id);
 			request.getSession(false).setAttribute("Userbyid", userbyid);
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/edit.jsp");
+			response.sendRedirect(basePath + "edit.jsp");
 
 		}
 
@@ -107,8 +110,7 @@ public class Controller extends HttpServlet {
 			if (status.equals("success")) {
 				List<Register> deleteuser = dao.doloadRegister();
 				request.getSession(false).setAttribute("Registration", deleteuser);
-
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/registerdetails.jsp");
+				response.sendRedirect(basePath + "registerdetails.jsp");
 			}
 		}
 
@@ -122,10 +124,10 @@ public class Controller extends HttpServlet {
 
 			if (result == true) {
 
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewinvestorprofile.jsp");
+				response.sendRedirect(basePath + "viewinvestorprofile.jsp");
 			} else {
 
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investorprofile.jsp");
+				response.sendRedirect(basePath + "investorprofile.jsp");
 			}
 
 		}
@@ -139,10 +141,10 @@ public class Controller extends HttpServlet {
 
 			if (result == true) {
 
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewideapersonprofile.jsp");
+				response.sendRedirect(basePath + "viewideapersonprofile.jsp");
 			} else {
 
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersonprofile.jsp");
+				response.sendRedirect(basePath + "ideapersonprofile.jsp");
 			}
 		}
 		if (actioncode.equals("getallData")) {
@@ -154,7 +156,7 @@ public class Controller extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("id"));
 			List<Ideaperson> person = dao.getIdeapersonById(id);
 			request.getSession(false).setAttribute("Ideaperson", person);
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewideapersonprofile.jsp");
+			response.sendRedirect(basePath + "viewideapersonprofile.jsp");
 		}
 		if (actioncode.equals("editinvestor")) {
 
@@ -163,14 +165,14 @@ public class Controller extends HttpServlet {
 			List<Investor> investors = dao.getInvestorById(id);
 			request.getSession(false).setAttribute("Investor", investors);
 			request.getSession(false).setAttribute("User", reg);
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/editinvestor.jsp");
+			response.sendRedirect(basePath + "editinvestor.jsp");
 		}
 		if (actioncode.equals("editideaperson")) {
 
 			id = Integer.parseInt(request.getParameter("id"));
 			List<Ideaperson> person = dao.getIdeapersonById(id);
 			request.getSession(false).setAttribute("Ideaperson", person);
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/editideaperson.jsp");
+			response.sendRedirect(basePath + "editideaperson.jsp");
 		}
 		if (actioncode.equals("uploadidea")) {
 
@@ -256,70 +258,65 @@ public class Controller extends HttpServlet {
 		response.setContentType("text/html");
 
 		// REGISTRATION START
-				if (actioncode.equals("addRegister")) {
+		if (actioncode.equals("addRegister")) {
 
-					String type = request.getParameter("st");
-					String name = request.getParameter("name");
-					String phone = request.getParameter("pn");
-					String email = request.getParameter("email");
-					String username = request.getParameter("un");
-					String password = request.getParameter("password");
+			String type = request.getParameter("st");
+			String name = request.getParameter("name");
+			String phone = request.getParameter("pn");
+			String email = request.getParameter("email");
+			String username = request.getParameter("un");
+			String password = request.getParameter("password");
 
-					Register reg = new Register();
-					reg = new Register(type, name, phone, email, username, password);
-					try {
-
-						boolean resul = dao.register(reg);
-
-						if (resul) {
-
-							response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/userlogin.jsp");
-							System.out.println("Registration Sucessfully");
-						} else {
-							out.println("<h1>This User is Already Register with Swap Portal</h1>");
-							out.println("To try again<a href=wp-content/Frontend/registration.jsp>Click here</a>");
-						}
-
-					} finally {
-						out.close();
-					}
-				} // REGISTRATION END
-
-				// LOGIN START
-				if (actioncode.equals("addLogin")) {
-					String email = request.getParameter("email");
-					String password = request.getParameter("password");
-
-					if (email.trim().length() >= 0 && email != null && password.trim().length() >= 0 && password != null) {
-						boolean result = dao.authenticateLoginUser(email, password);
-						if (result == true) {
-							Register reg = dao.getUserdatabyEmail(email);
-							List<Register> lista1 = dao.getUserBy(email);
-							request.getSession(false).setAttribute("User", lista1);
-
-							if (reg.getType().equals("Investor")) {
-
-								List<Ideaperson> person = dao.doloadIdeaperson();
-								request.getSession(false).setAttribute("Ideaperson", person);
-								response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investordashboard.jsp");
-							} else {
-
-								List<Investor> list = dao.doloadInvestor();
-								request.getSession(false).setAttribute("Investor", list);
-								response.sendRedirect(
-										request.getContextPath() + "/wp-content/Frontend/ideapersondashboard.jsp");
-							}
-						} else {
-							response.sendRedirect(request.getContextPath() + "/wp-content/error.jsp");
-						}
-
-					}
-
+			Register reg = new Register();
+			reg = new Register(type, name, phone, email, username, password);
+			try {
+				boolean resul = dao.register(reg);
+				if (resul) {
+					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/userlogin.jsp");
+					System.out.println("Registration Sucessfully");
+				} else {
+					out.println("<h1>This User is Already Register with Swap Portal</h1>");
+					out.println("To try again<a href=wp-content/Frontend/registration.jsp>Click here</a>");
 				}
 
-				// LOGIN END
-		
-		
+			} finally {
+				out.close();
+			}
+		} // REGISTRATION END
+
+		// LOGIN START
+		if (actioncode.equals("addLogin")) {
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+
+			if (email.trim().length() >= 0 && email != null && password.trim().length() >= 0 && password != null) {
+				boolean result = dao.authenticateLoginUser(email, password);
+				if (result == true) {
+					Register reg = dao.getUserdatabyEmail(email);
+					List<Register> lista1 = dao.getUserBy(email);
+					request.getSession(false).setAttribute("User", lista1);
+
+					if (reg.getType().equals("Investor") && reg.getType() != null) {
+						List<Ideaperson> person = dao.doloadIdeaperson();
+						request.getSession(false).setAttribute("Ideaperson", person);
+						response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investordashboard.jsp");
+					} else {
+						List<Investor> list = dao.doloadInvestor();
+						request.getSession(false).setAttribute("Investor", list);
+						response.sendRedirect(
+								request.getContextPath() + "/wp-content/Frontend/ideapersondashboard.jsp");
+					}
+				} else {
+					request.setAttribute("errorMessage" , "Invalid username or password!");
+					request.getRequestDispatcher("/wp-content/Frontend/userlogin.jsp").forward(request, response);
+				}
+
+			}
+
+		}
+
+		// LOGIN END
+
 		// SEND EMAIL START
 		if (actioncode.equals("emailCompose")) {
 			String recipient = request.getParameter("recipient");
@@ -366,7 +363,7 @@ public class Controller extends HttpServlet {
 				} finally {
 					request.setAttribute("Message", resultMessage);
 					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/userlogin.jsp");
-					
+
 				}
 			} else {
 				response.sendRedirect(request.getContextPath() + "/wp-content/error.jsp");
@@ -374,8 +371,6 @@ public class Controller extends HttpServlet {
 
 		}
 
-	
-		
 		// update Start
 
 		if (actioncode.equals("updateData")) {
@@ -407,7 +402,7 @@ public class Controller extends HttpServlet {
 		if (actioncode.equals("search")) {
 			String city = request.getParameter("city");
 			String expfund = request.getParameter("funding");
-			
+
 			List<Ideaperson> list = dao.getsearch(city, expfund);
 			request.getSession(false).setAttribute("search", list);
 			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/sresult.jsp");

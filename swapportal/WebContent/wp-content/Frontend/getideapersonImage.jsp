@@ -15,7 +15,7 @@ Integer id = Integer.parseInt(request.getParameter("id"));
 			Connection con = null;
 			 
 			try{
-			    Class.forName("com.mysql.jdbc.Driver");
+			    Class.forName("com.mysql.cj.jdbc.Driver");
 			    con = DriverManager.getConnection(connectionURL, user, pass);
 			    
 			    PreparedStatement ps = con.prepareStatement("select photo from ideaperson where id=?");

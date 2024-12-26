@@ -63,20 +63,19 @@
                     <form action="<%=request.getContextPath() %>/Controller?id=<%=reg.getId() %>" class="form-horizontal" method="post">
                      <input type="hidden" name="actionCode" value="updateData">   
                     <h4>Personal info</h4>
-                    
-<!--                     <div class="form-group"> -->
-                                            
-<!--                                             <div class="col-md-6">                                         -->
-<!--                                                 <select class="form-control select" name="st"> -->
-<!--                                                 	<option>Select Type</option> -->
-<!--                                                     <option>Investor</option> -->
-<!--                                                     <option>Idea Person</option> -->
-                                                   
-<!--                                                 </select> -->
-<!--                                             </div> -->
-<!--                                             </div> -->
-                                         
-                   <div class="form-group">
+
+						<div class="form-group">
+							<div class="col-md-6">
+								<select class="form-control select" name="st" disabled>
+									<option value="" <%= reg.getType() == null ? "selected" : "" %>>Select Type</option>
+            						<option value="Investor" <%= "Investor".equals(reg.getType()) ? "selected" : "" %>>Investor</option>
+            						<option value="Ideaperson" <%= "Ideaperson".equals(reg.getType()) ? "selected" : "" %>>Idea Person</option>
+
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
                         <div class="col-md-6">
                             <input type="text" class="form-control" placeholder="Name" name="name" value="<%=reg.getName()%>"/>
                         </div>

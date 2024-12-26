@@ -46,6 +46,6 @@
 
 	<context-param>
 		<param-name>pass</param-name>
-		<param-value>swapportal123</param-value>
+		<param-value>swapportal@7871</param-value>
 	</context-param>
 </web-app>

@@ -14,7 +14,7 @@
 	Connection con = null;
 
 	try {
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection(connectionURL, user, pass);
 		System.out.println("hi");
 		PreparedStatement ps = con.prepareStatement("select photo from ideaperson where id = ?");
