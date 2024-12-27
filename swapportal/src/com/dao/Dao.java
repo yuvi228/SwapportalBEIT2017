@@ -498,7 +498,7 @@ public class Dao {
 		Ideaperson person = null;
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("from Ideaperson where where id = :id");
+			Query query = session.createQuery("from Ideaperson where id = :id");
 			query.setParameter("id", id);
 			person = (Ideaperson) query.uniqueResult();
 			tx.commit();

@@ -46,8 +46,8 @@
 <link href="<%=request.getContextPath()%>/css/owl.theme.css"
 	rel="stylesheet" type="text/css" media="screen">
 <!--mega menu -->
-<link href="<%=request.getContextPath()%>/css/yamm.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/yamm.css" rel="stylesheet"
+	type="text/css">
 <!--cube css-->
 <link
 	href="<%=request.getContextPath()%>/cubeportfolio/css/cubeportfolio.min.css"
@@ -61,6 +61,9 @@
           <script src="<%=request.getContextPath()%>/https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="<%=request.getContextPath()%>/https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+<style type="text/css">
+</style>
 </head>
 <body background="<%=request.getContextPath()%>/Image/bg.jpg">
 	<div class="top-bar-dark">
@@ -92,17 +95,16 @@
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
 						<%
-							if (!regg.isEmpty() && regg != null) {
-								Iterator<Register> itr = regg.iterator();
-								Register regi = null;
-								while (itr.hasNext()) {
-									regi = (Register) itr.next();
+						if (!regg.isEmpty() && regg != null) {
+							Iterator<Register> itr = regg.iterator();
+							Register regi = null;
+							while (itr.hasNext()) {
+								regi = (Register) itr.next();
 						%>
 						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regi.getUsername()%></a></li>
-						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
 						<%
-							}
-							}
+						}
+						}
 						%>
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
@@ -134,35 +136,7 @@
 					alt="A Social Online Platform for great ideas and Startups">A
 				Social Online Platform for great ideas and Startups
 			</div>
-			<!--                  <div class="navbar-collapse collapse"> -->
-			<!--                     <ul class="nav navbar-nav navbar-right"> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/index.jsp">Home </i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu home li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/investor.jsp">Investor</i></a> --%>
 
-			<!--                         </li> -->
-			<!--                         menu Portfolio li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/ideaperson.jsp">Idea person</i></a> --%>
-
-			<!--                         </li> -->
-			<!--                         menu blog li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/faq.jsp">FAQ</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/feedback.jsp">Feedback</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA;" href="<%=request.getContextPath() %>/wp-content/Frontend/contactus.jsp">Contact US</i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu pages li end here -->
-
-			<!--                            </ul> -->
-			<!--                 </div>/.nav-collapse -->
 
 		</div>
 	</div>
@@ -179,7 +153,7 @@
 				<div class="col-sm-6 hidden-xs text-right">
 					<ol class="breadcrumb">
 						<li><a
-							href="<%=request.getContextPath()%>/wp-content/Frontend/ideapersondashboard.jsp">Home</a></li>
+							href="<%=request.getContextPath()%>/wp-content/Frontend/ideapersondashboard.jsp">Dashboard</a></li>
 						<li>Idea person profile</li>
 					</ol>
 				</div>
@@ -188,62 +162,58 @@
 	</div>
 	<!--breadcrumbs-->
 	<%
-		List<Post> registerList = (List<Post>) session.getAttribute("Idea");
+	List<Post> registerList = (List<Post>) session.getAttribute("Idea");
 	%>
 
-	<center>
-
-		<div class="row property-listing">
-
+	<div class="container">
+		<div class="row property-listing table-container">
 			<div class="col-sm-8">
 				<br />
 				<h3>Idea Details</h3>
 
-				<table>
-					<%
-						if (!registerList.isEmpty() && registerList != null) {
-							Iterator<Post> it = registerList.iterator();
-							Post batchObj = null;
-							while (it.hasNext()) {
-								batchObj = (Post) it.next();
-					%>
-					<tr>
-						<td>Project Title</td>
+
+				<%
+				if (registerList != null && !registerList.isEmpty()) {
+					Iterator<Post> it = registerList.iterator();
+					Post batchObj = null;
+					while (it.hasNext()) {
+						batchObj = it.next();
+				%>
+				<table class="table table-bordered table-hover" style="color: black;">
+					<tr >
+						<td><strong>Project Title</strong></td>
 						<td><%=batchObj.getTitle()%></td>
 					</tr>
 					<tr>
-						<td>Project Definition</td>
+						<td><strong>Project Definition</strong></td>
 						<td><%=batchObj.getDefinition()%></td>
 					</tr>
 					<tr>
-						<td>Project Keyword</td>
+						<td><strong>Project Keyword</strong></td>
 						<td><%=batchObj.getKeyword()%></td>
 					</tr>
 					<tr>
-						<td>Project Status</td>
+						<td><strong>Project Status</strong></td>
 						<td><%=batchObj.getStatus()%></td>
 					</tr>
 					<tr>
-						<td>Project Abstract</td>
+						<td><strong>Project Abstract</strong></td>
 						<td><%=batchObj.getAbstrct()%></td>
 					</tr>
 					<tr>
-						<td>Project Descrition</td>
+						<td><strong>Project Description</strong></td>
 						<td><%=batchObj.getDescription()%></td>
 					</tr>
-					<%
-						}
-						}
-					%>
 				</table>
-
+				<%
+				}
+				}
+				%>
 
 			</div>
-
 		</div>
-		<!--property listing row-->
+	</div>
 
-	</center>
 
 	<jsp:include page="footer.jsp"></jsp:include>
 	<!--scripts and plugins -->
@@ -254,15 +224,13 @@
 		src="<%=request.getContextPath()%>/bootstrap/js/bootstrap.min.js"
 		type="text/javascript"></script>
 	<!--easing plugin for smooth scroll-->
-	<script
-		src="<%=request.getContextPath()%>/js/jquery.easing.1.3.min.js"
+	<script src="<%=request.getContextPath()%>/js/jquery.easing.1.3.min.js"
 		type="text/javascript"></script>
 	<!--sticky header-->
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/jquery.sticky.js"></script>
 	<!--flex slider plugin-->
-	<script
-		src="<%=request.getContextPath()%>/js/jquery.flexslider-min.js"
+	<script src="<%=request.getContextPath()%>/js/jquery.flexslider-min.js"
 		type="text/javascript"></script>
 	<!--parallax background plugin-->
 	<script src="<%=request.getContextPath()%>/js/jquery.stellar.min.js"

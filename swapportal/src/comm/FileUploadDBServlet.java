@@ -396,6 +396,7 @@ public class FileUploadDBServlet extends HttpServlet {
 			} else {
 				System.out.println("error");
 				// response.sendRedirect("result.jsp?message=Some+Error+Occurred");
+				
 			}
 			id = Integer.parseInt(request.getParameter("id"));
 			boolean ideaperson = dao.authenticateIdeaperson(id);
@@ -405,11 +406,13 @@ public class FileUploadDBServlet extends HttpServlet {
 			request.getSession(false).setAttribute("Ideaperson", ideaperson1);
 			if (ideaperson == true) {
 
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersonprofile.jsp");
+				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewideapersonprofile.jsp");
 			} else {
 
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewideapersonprofile.jsp");
+				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersonprofile.jsp");
 			}
+			
+			
 
 		} // Add Idea person Closed
 	}

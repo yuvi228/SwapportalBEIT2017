@@ -56,6 +56,13 @@ if (!regg.isEmpty() && regg != null) {
 <!-- custom css-->
 <link href="<%=request.getContextPath()%>/css/style.css"
 	rel="stylesheet" type="text/css" media="screen">
+
+<style>
+label {
+	color: black !important;
+	/* Ensures that all labels in the form are black */
+}
+</style>
 </head>
 <body background="<%=request.getContextPath()%>/Image/bg.jpg"
 	style="background-attachment: fixed;">
@@ -120,35 +127,7 @@ if (!regg.isEmpty() && regg != null) {
 					alt="A Social Online Platform for great ideas and Startups">A
 				Social Online Platform for great ideas and Startups
 			</div>
-			<!--                  <div class="navbar-collapse collapse"> -->
-			<!--                     <ul class="nav navbar-nav navbar-right"> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/index.jsp">Home </i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu home li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/investor.jsp">Investor</i></a> --%>
 
-			<!--                         </li> -->
-			<!--                         menu Portfolio li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/ideaperson.jsp">Idea person</i></a> --%>
-
-			<!--                         </li> -->
-			<!--                         menu blog li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/faq.jsp">FAQ</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/feedback.jsp">Feedback</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA;" href="<%=request.getContextPath() %>/wp-content/Frontend/contactus.jsp">Contact US</i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu pages li end here -->
-
-			<!--                            </ul> -->
-			<!--                 </div>/.nav-collapse -->
 
 		</div>
 	</div>
@@ -164,12 +143,12 @@ if (!regg.isEmpty() && regg != null) {
 						if (regi.getType().equals("Investor")) {
 						%>
 						<li><a
-							href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp">Home</a></li>
+							href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp">Dashboard</a></li>
 						<%
 						} else {
 						%>
 						<li><a
-							href="<%=request.getContextPath()%>/wp-content/Frontend/ideapersondashboard.jsp">Home</a></li>
+							href="<%=request.getContextPath()%>/wp-content/Frontend/ideapersondashboard.jsp">Dashboard</a></li>
 						<%
 						}
 						%>
@@ -204,13 +183,13 @@ if (!regg.isEmpty() && regg != null) {
 						}
 						%>
 						<div class="form-group">
-							<label class="col-md-3 col-xs-12 control-label">Name<font
+							<label class="col-md-3 col-xs-12 control-label">Subject<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="name" />
+								name="name" required />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Comments</label>
-							<textarea rows="5" cols="112" name="comments"></textarea>
+							<textarea rows="5" cols="112" name="comments" required></textarea>
 						</div>
 
 						<button type="submit" class="btn btn-theme-bg">Submit</button>

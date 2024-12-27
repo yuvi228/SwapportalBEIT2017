@@ -70,6 +70,28 @@
           <script src="<%=request.getContextPath()%>/https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="<%=request.getContextPath()%>/https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+<style>
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+	margin-bottom: 20px;
+}
+
+.card {
+	margin-bottom: 20px;
+}
+
+.card img {
+	max-width: 100%; /* Ensure the image is responsive */
+	max-height: 200px; /* Adjust the height of the image */
+	object-fit: cover;
+	/* Ensure the image covers the area without distortion */
+}
+</style>
+
 </head>
 <body background="<%=request.getContextPath()%>/Image/bg.jpg"
 	style="background-attachment: fixed;">
@@ -134,66 +156,17 @@
 					alt="A Social Online Platform for great ideas and Startups">A
 				Social Online Platform for great ideas and Startups
 			</div>
-			<!--                  <div class="navbar-collapse collapse"> -->
-			<!--                     <ul class="nav navbar-nav navbar-right"> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/index.jsp">Home </i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu home li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/investor.jsp">Investor</i></a> --%>
 
-			<!--                         </li> -->
-			<!--                         menu Portfolio li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/ideaperson.jsp">Idea person</i></a> --%>
-
-			<!--                         </li> -->
-			<!--                         menu blog li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/faq.jsp">FAQ</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/feedback.jsp">Feedback</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA;" href="<%=request.getContextPath() %>/wp-content/Frontend/contactus.jsp">Contact US</i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu pages li end here -->
-
-			<!--                            </ul> -->
-			<!--                 </div>/.nav-collapse -->
 
 		</div>
 	</div>
 
-	<div class="breadcrumb-wrap">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					<h4>Investor Dashboard</h4>
-				</div>
-				<div class="col-sm-6 hidden-xs text-right">
-					<ol class="breadcrumb">
-						<li><a
-							href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp">Home</a></li>
-						<li>Investor Dashboard</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--breadcrumbs-->
 
-
-	<div class="col-sm-3 margin40">
-
+	<div class="col-sm-3">
 		<ul class="list-unstyled side-nav">
-
 			<li><a
 				href="<%=request.getContextPath()%>/Controller?actionCode=investorprofile&id=<%=regi.getId()%>"><i
-					class="fa fa-cogs"></i>Profile</a></li>
-
+					class="fa fa-cogs"></i> Profile</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp"><i
 					class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -203,104 +176,64 @@
 			<li><a
 				href="<%=request.getContextPath()%>/Controller?actionCode=getfeedback&id=<%=regi.getId()%>"><i
 					class="fa fa-search"></i> Feedback</a></li>
-
 		</ul>
-
 	</div>
+
+
 
 	<div class="col-md-9">
 		<h3 class="title-section">Idea Proposals</h3>
+		<div class="row">
+			<%
+			if (post != null && !post.isEmpty()) {
+				Iterator<Ideaperson> it = post.iterator();
+				Ideaperson pos = null;
+				while (it.hasNext()) {
+					pos = (Ideaperson) it.next();
+					Integer id = pos.getId();
+			%>
 
-		<div class="row property-listing">
-			<div class="col-sm-4 margin30">
-				<div class="image">
-					<div class="content">
-						<%
-						Integer id = regi.getId();
-						%>
-						<!-- 						<img -->
-						<%-- 							src="<%=request.getContextPath()%>/wp-content/Frontend/getallideapersonImage.jsp?id=<%=id%>" --%>
-						<!-- 							style="width: 150px; height: 150px; margin: 0px auto;" -->
-						<!-- 							class="img-responsive" alt=""> <br /> -->
-
-						<%
-						if (id != null) {
-						%>
-						<img
-							src="<%=request.getContextPath()%>/FileUploadDBServlet?actionCode=getallinvestorImage&id=<%=id%>"
-							style="width: 150px; height: 150px; margin: 0px auto;"
-							class="img-responsive" alt="">
-						<%
-						}
-						%>
-						<br /> <br />
-						<%
-						}
-						}
-						%>
-						<%
-						if (!post.isEmpty() && post != null) {
-							Iterator<Ideaperson> it = post.iterator();
-							Ideaperson pos = null;
-							while (it.hasNext()) {
-								pos = (Ideaperson) it.next();
-						%>
-						<div class="profile-controls">
-							<a href="<%=pos.getTw()%>" class="profile-control-left twitter"><span
-								class="fa fa-twitter fa-2x"></span></a>&nbsp; &nbsp;&nbsp; <a
-								href="<%=pos.getFb()%>" class="profile-control-center facebook"><span
-								class="fa fa-facebook fa-2x"></span></a>&nbsp; &nbsp;&nbsp; <a
-								href="<%=pos.getGg()%>" class="profile-control-right googleplus"><span
-								class="fa fa-google-plus fa-2x"></span></a>
-						</div>
-
+			<%
+			if (id != null) {
+			%>
+			<div class="col-sm-4 mb-4">
+				<div class="card h-100">
+					<img
+						src="<%=request.getContextPath()%>/wp-content/Frontend/getallideapersonImage.jsp?id=<%=id%>"
+						class="card-img-top" alt="Idea Image"
+						style="object-fit: cover; height: 200px;"
+						onerror="this.onerror=null; this.src='<%=request.getContextPath()%>/Image/default_image_idea.png';" />
+					<div class="card-body">
+						<h5 class="card-title"><%=pos.getProjectabstract()%></h5>
+						<p class="card-text"><%=pos.getAboutyou()%></p>
 					</div>
-					<!--content-->
+					<div class="card-footer text-muted">
+						Expected Fund:
+						<%=pos.getExpectfund()%>
+					</div>
 				</div>
-				<!--image-->
 			</div>
-			<!--image col-->
+			<%
+			}
+			%>
 
-			<div class="col-sm-8"
-				style="font-style: oblique; font-variant: inherit;">
-				<font color="black">
-					<table>
-						<tr>
-							<td style="width: 150px;"><b>About You:-</b></td>
-							<td><%=pos.getAboutyou()%></td>
-						</tr>
-						<tr>
-							<td><b>Project Abstract:-</b></td>
-							<td><%=pos.getProjectabstract()%></td>
-						</tr>
-
-						<tr>
-							<td><b>Expected Fund:-</b></td>
-							<td><%=pos.getExpectfund()%></td>
-						</tr>
-						<tr>
-							<td><b>City:-</b></td>
-							<td><%=pos.getCity()%></td>
-						</tr>
-
-
-					</table>
-				</font>
-
-
-			</div>
-
-
+			<%
+			}
+			}
+			%>
 		</div>
-		<hr>
-		<!--property listing row-->
-
-		<%
-		}
-		}
-		%>
-
 	</div>
+
+
+
+	<hr>
+
+
+	<%
+	}
+	}
+	%>
+
 
 
 
@@ -351,9 +284,6 @@
 	<!--customizable plugin edit according to your needs-->
 	<script src="<%=request.getContextPath()%>/js/custom.js"
 		type="text/javascript"></script>
-
-
-
 </body>
 </html>
 

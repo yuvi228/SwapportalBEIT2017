@@ -16,7 +16,6 @@
 	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection(connectionURL, user, pass);
-		System.out.println("hi");
 		PreparedStatement ps = con.prepareStatement("select photo from ideaperson where id = ?");
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();

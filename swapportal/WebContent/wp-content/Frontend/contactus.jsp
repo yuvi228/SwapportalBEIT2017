@@ -62,7 +62,7 @@
                     </div><!--person col end-->
                     <div class="col-sm-4 text-center">
                         <div class="person-v2">
-                            <img src="<%=request.getContextPath() %>/assets/images/users/yuvraj.jpg" class="img-responsive" alt="">
+                            <img src="<%=request.getContextPath() %>/Image/yuvraj.png" class="img-responsive" alt="">
                             <div class="person-desc-v2">
                                 <h3>Yuvraj Rajput</h3>
                                 <em>Creative Designer and Developer</em>

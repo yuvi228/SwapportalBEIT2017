@@ -122,8 +122,8 @@ to {
 
 						<h3 class="text-left">
 							<i class="fa fa-unlock"
-								style="margin-left: 30px; margin-top: 10px;"></i>Log in to your
-							account
+								style="margin-left: 30px; margin-top: 10px;"></i>Access Your
+							Investor/Entrepreneur Dashboard on Swap Portal
 						</h3>
 						<fieldset>
 							<section>

@@ -168,7 +168,7 @@
                                      <%
 						Integer id = regi.getId();
 					%>
-                                        <img  height="80px" width="180px" src="<%=request.getContextPath()%>/wp-content/Frontend/getideapersonImage.jsp?id=<%=id%>" alt="Nadia Ali">
+                                        <img  height="80px" width="180px" src="<%=request.getContextPath()%>/wp-content/Frontend/getideapersonImage.jsp?id=<%=id%>" alt="">
                                    		<div class="profile-data-name"><h3><%=regi.getName() %></h3></div>
                                     </div>
                                     <div class="profile-data" style="float: left; margin-left: 100px" >
