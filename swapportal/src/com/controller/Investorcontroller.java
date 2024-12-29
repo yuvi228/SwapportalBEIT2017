@@ -42,10 +42,10 @@ public class Investorcontroller extends HttpServlet {
 		if (actioncode.equals("editinvestor")) {
 
 			id = Integer.parseInt(request.getParameter("id"));
-			List<Register> reg = dao.getRegisterData(id);
-			List<Investor> investors = dao.getInvestorById(id);
-			request.getSession(false).setAttribute("Investor", investors);
-			request.getSession(false).setAttribute("User", reg);
+			Register reg = dao.getUserdataById(id);
+			Investor investor = dao.getInvestorById1(id);
+			request.getSession(false).setAttribute("Investordata", investor);
+			request.getSession(false).setAttribute("Userdata", reg);
 			response.sendRedirect(basePath + "editinvestor.jsp");
 		}
 		if (actioncode.equals("getallInvestor")) {
@@ -56,17 +56,14 @@ public class Investorcontroller extends HttpServlet {
 		}
 		if (actioncode.equals("investorprofile")) {
 			id = Integer.parseInt(request.getParameter("id"));
-			boolean result = dao.authenticateInvestor(id);
-			List<Register> lista = dao.getRegisterData(id);
-			request.getSession(false).setAttribute("User", lista);
-			List<Investor> investor = dao.getInvestorById(id);
-			request.getSession(false).setAttribute("invprofile", investor);
+			Investor investor = dao.getInvestorProfileIfAvailable(id);
+			Register userData = dao.getUserdataById(id);
+			request.getSession(false).setAttribute("Userdata", userData);
 
-			if (result == true) {
-
+			if (investor != null) {
+				request.getSession(false).setAttribute("Investordata", investor);
 				response.sendRedirect(basePath + "viewinvestorprofile.jsp");
 			} else {
-
 				response.sendRedirect(basePath + "investorprofile.jsp");
 			}
 
@@ -213,7 +210,7 @@ public class Investorcontroller extends HttpServlet {
 				handleError(response);
 			} finally {
 				if (session != null) {
-					session.close(); // Always close the session
+					session.close();
 				}
 			}
 		}
@@ -237,17 +234,17 @@ public class Investorcontroller extends HttpServlet {
 
 	private void processPostUpload(Integer id, HttpServletRequest request, HttpServletResponse response,
 			String userType) throws IOException {
-		boolean isAuthenticated = (userType.equals("Investor") ? dao.authenticateInvestor(id)
-				: dao.authenticateIdeaperson(id));
-		List<Register> list = dao.getRegisterData(id);
-		request.getSession().setAttribute("User", list);
 
-		String redirectPage = (userType.equals("Investor") ? "viewinvestorprofile.jsp" : "viewideapersonprofile.jsp");
-		if (isAuthenticated) {
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/" + redirectPage);
+		Investor investor = dao.getInvestorProfileIfAvailable(id);
+		request.getSession().setAttribute("Investordata", investor);
+
+		Register reg = dao.getUserdataById(id);
+		request.getSession().setAttribute("Userdata", reg);
+
+		if (investor != null) {
+			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewinvestorprofile.jsp");
 		} else {
-			response.sendRedirect(
-					request.getContextPath() + "/wp-content/Frontend/" + userType.toLowerCase() + "profile.jsp");
+			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investorprofile.jsp");
 		}
 	}
 

@@ -5,15 +5,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-  List<Register> reg = (List<Register>) session.getAttribute("User");
+  Register reg = (Register) session.getAttribute("Userdata");
   %>
-<%
-   					if(!reg.isEmpty() && reg!= null){
-					Iterator<Register> itr = reg.iterator();
-					Register regi = null;
-					while(itr.hasNext()){
-					regi = (Register)itr.next();
-   				%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -103,7 +97,7 @@ label {
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
 
-						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regi.getUsername()%></a></li>
+						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=reg.getUsername()%></a></li>
 						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
@@ -128,36 +122,6 @@ label {
 					alt="A Social Online Platform for great ideas and Startups">A
 				Social Online Platform for great ideas and Startups
 			</div>
-			<!--                  <div class="navbar-collapse collapse"> -->
-			<!--                     <ul class="nav navbar-nav navbar-right"> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/index.jsp">Home </i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu home li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/investor.jsp">Investor</i></a> --%>
-
-			<!--                         </li> -->
-			<!--                         menu Portfolio li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/ideaperson.jsp">Idea person</i></a> --%>
-
-			<!--                         </li> -->
-			<!--                         menu blog li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/faq.jsp">FAQ</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/feedback.jsp">Feedback</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA;" href="<%=request.getContextPath() %>/wp-content/Frontend/contactus.jsp">Contact US</i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu pages li end here -->
-
-			<!--                            </ul> -->
-			<!--                 </div>/.nav-collapse -->
-
 		</div>
 	</div>
 
@@ -202,7 +166,7 @@ label {
 						<span>Investor profile</span>
 					</h3>
 					<form role="form"
-						action="<%=request.getContextPath()%>/Investorcontroller?id=<%=regi.getId()%>"
+						action="<%=request.getContextPath()%>/Investorcontroller?id=<%=reg.getId()%>"
 						method="post" name="investor" onsubmit="return validate()"
 						enctype="multipart/form-data">
 						<input type="hidden" name="actionCode" value="addInvestor">
@@ -211,18 +175,15 @@ label {
 
 							<label class="col-md-3 col-xs-12 control-label">Email<font
 								color=red>*</font></label> <input type="text" Disabled
-								class="form-control" value="<%=regi.getEmail()%>" name="email" />
+								class="form-control" value="<%=reg.getEmail()%>" name="email" />
 
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Name<font
 								color=red>*</font></label> <input type="text" Disabled
-								class="form-control" name="name" value="<%=regi.getName()%>" />
+								class="form-control" name="name" value="<%=reg.getName()%>" />
 						</div>
-						<%
-						}
-						}
-						%>
+
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Select
 								your type<font color=red>*</font>

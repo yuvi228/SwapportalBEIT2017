@@ -7,8 +7,11 @@
 
 
 <%
-	List<Register> regg = (List<Register>) session.getAttribute("User");
+	Register regg = (Register) session.getAttribute("Userdetails");
 %>
+<%
+	List<Post> ideaList = (List<Post>) session.getAttribute("PostsbyIdeaperson");
+	%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -94,18 +97,9 @@
 				</div>
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
-						<%
-						if (!regg.isEmpty() && regg != null) {
-							Iterator<Register> itr = regg.iterator();
-							Register regi = null;
-							while (itr.hasNext()) {
-								regi = (Register) itr.next();
-						%>
-						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regi.getUsername()%></a></li>
-						<%
-						}
-						}
-						%>
+
+						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regg.getUsername()%></a></li>
+
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
 					</ul>
@@ -148,72 +142,80 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h4>Idea person profile</h4>
+					<h4>Idea Repository</h4>
 				</div>
 				<div class="col-sm-6 hidden-xs text-right">
 					<ol class="breadcrumb">
 						<li><a
 							href="<%=request.getContextPath()%>/wp-content/Frontend/ideapersondashboard.jsp">Dashboard</a></li>
-						<li>Idea person profile</li>
+						<li>Idea Repository</li>
 					</ol>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--breadcrumbs-->
-	<%
-	List<Post> registerList = (List<Post>) session.getAttribute("Idea");
-	%>
-
-	<div class="container">
-		<div class="row property-listing table-container">
-			<div class="col-sm-8">
-				<br />
-				<h3>Idea Details</h3>
 
 
-				<%
-				if (registerList != null && !registerList.isEmpty()) {
-					Iterator<Post> it = registerList.iterator();
-					Post batchObj = null;
-					while (it.hasNext()) {
-						batchObj = it.next();
-				%>
-				<table class="table table-bordered table-hover" style="color: black;">
-					<tr >
-						<td><strong>Project Title</strong></td>
-						<td><%=batchObj.getTitle()%></td>
-					</tr>
-					<tr>
-						<td><strong>Project Definition</strong></td>
-						<td><%=batchObj.getDefinition()%></td>
-					</tr>
-					<tr>
-						<td><strong>Project Keyword</strong></td>
-						<td><%=batchObj.getKeyword()%></td>
-					</tr>
-					<tr>
-						<td><strong>Project Status</strong></td>
-						<td><%=batchObj.getStatus()%></td>
-					</tr>
-					<tr>
-						<td><strong>Project Abstract</strong></td>
-						<td><%=batchObj.getAbstrct()%></td>
-					</tr>
-					<tr>
-						<td><strong>Project Description</strong></td>
-						<td><%=batchObj.getDescription()%></td>
-					</tr>
-				</table>
-				<%
-				}
-				}
-				%>
 
+	<div class="container shortcodes">
+		<div class="row">
+			<div class="col-sm-12">
+<!-- 				<h4 class="margin30">Idea Repository</h4> -->
+				<font color="black">
+					<table class="table table-condensed">
+						<thead>
+							<tr>
+
+								<th>PId</th>
+								<!-- 								<th>Id</th> -->
+								<th>Definition</th>
+								<th>Title</th>
+								<th>Keyword</th>
+								<th>Abstract</th>
+								<th>Description</th>
+								<th>Category</th>
+								<th>Status</th>
+								<th>Startdate</th>
+								<th>Edit</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+							if (!ideaList.isEmpty() && ideaList != null) {
+								Iterator<Post> it = ideaList.iterator();
+								Post batchObj = null;
+								while (it.hasNext()) {
+									batchObj = (Post) it.next();
+							%>
+							<tr>
+								<td><%=batchObj.getPid()%></td>
+<%-- 								<td><%=batchObj.getId()%></td> --%>
+								<td><%=batchObj.getDefinition()%></td>
+								<td><%=batchObj.getTitle()%></td>
+								<td><%=batchObj.getKeyword()%></td>
+								<td><%=batchObj.getAbstrct()%></td>
+								<td><%=batchObj.getDescription()%></td>
+								<td><%=batchObj.getCategory()%></td>
+								<td><%=batchObj.getStatus()%></td>
+								<td><%=batchObj.getStartdate()%></td>
+
+								<td><a
+									href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=updateIdea&pid=<%=batchObj.getPid()%>">Edit</a></td>
+								<td><a
+									href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=deleteIdea&pid=<%=batchObj.getPid()%>">Delete</a></td>
+							</tr>
+							<%
+							}
+							}
+							%>
+						</tbody>
+					</table>
+				</font>
 			</div>
 		</div>
 	</div>
-
 
 	<jsp:include page="footer.jsp"></jsp:include>
 	<!--scripts and plugins -->

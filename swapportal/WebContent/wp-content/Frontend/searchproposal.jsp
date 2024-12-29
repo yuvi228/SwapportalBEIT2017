@@ -59,11 +59,38 @@ if (!reg.isEmpty() && reg != null) {
 
 <link rel="icon" href="<%=request.getContextPath()%>/favicon.ico"
 	type="image/x-icon" />
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://kit.fontawesome.com/a076d05399.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- END META SECTION -->
 <style>
 label {
 	color: black !important;
 	/* Ensures that all labels in the form are black */
+}
+
+.card {
+	border-radius: 1px;
+}
+
+.card-header {
+	font-weight: bold;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
 }
 </style>
 </head>
@@ -162,50 +189,48 @@ label {
 	</div>
 	<!--breadcrumbs-->
 	<div class="divide80"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
-				<div class="login-form">
-					<h3>
-						<span>Search Proposals</span>
-					</h3>
-					<form role="form" class="form-horizontal"
-						action="<%=request.getContextPath()%>/Ideapersoncontroller"
-						method="post">
-						<input type="hidden" name="actionCode" value="search">
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-lg-6 col-md-8">
+				<div class="card shadow-lg border-0">
+					<div class="card-header bg-primary text-white text-center">
+						<h3>Search Proposal based on City and Budget</h3>
+					</div>
+					<div class="card-body">
+						<form role="form"
+							action="<%=request.getContextPath()%>/Ideapersoncontroller"
+							method="post">
+							<input type="hidden" name="actionCode" value="search">
 
+							<!-- City Field -->
+							<div class="mb-3">
+								<label for="city" class="form-label">City <span
+									class="text-danger">*</span></label> <input type="text"
+									class="form-control" id="city" name="city"
+									placeholder="Enter city" required>
+							</div>
 
+							<!-- Funding Field -->
+							<div class="mb-3">
+								<label for="funding" class="form-label">Budget <span
+									class="text-danger">*</span></label> <input type="text"
+									class="form-control" id="funding" name="funding"
+									placeholder="Enter funding amount" required>
+							</div>
 
-						<div class="form-group">
-							<label class="col-md-3 col-xs-12 control-label">city<font
-								color=red>*</font>
-							</label> <input type="text" class="form-control" name="city" value=""
-								required />
-						</div>
-
-
-						<div class="form-group">
-							<label class="col-md-3 col-xs-12 control-label">Funding<font
-								color=red>*</font>
-							</label> <input type="text" class="form-control" name="funding" value=""
-								required />
-						</div>
-
-
-
-						<div class="pull-right">
-							<button class="btn btn-danger">
-								<span class="fa fa-search"></span> search
-							</button>
-						</div>
-					</form>
+							<!-- Submit Button -->
+							<div class="text-end">
+								<button type="submit" class="btn btn-primary">
+									<i class="fa fa-search"></i> Search
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
-
 			</div>
-
 		</div>
-
 	</div>
+
 
 
 	<br />

@@ -7,18 +7,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	List<Ideaperson> ideaperson = (List<Ideaperson>) session.getAttribute("Ideaperson");
+	List<Ideaperson> ideaperson = (List<Ideaperson>) session.getAttribute("Ideapersonlist");
 %>
 
 <%
-	List<Register> reg = (List<Register>) session.getAttribute("User");
-%>
-<%
-	if (!reg.isEmpty() && reg != null) {
-		Iterator<Register> itr = reg.iterator();
-		Register regi = null;
-		while (itr.hasNext()) {
-			regi = (Register) itr.next();
+	Register reg = (Register) session.getAttribute("Userdetail");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -126,7 +119,7 @@ body {
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
 
-						<li><i class="fa fa-lock"></i> Welcome <%=regi.getUsername()%></li>
+						<li><i class="fa fa-lock"></i> Welcome <%=reg.getUsername()%></li>
 						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
@@ -166,7 +159,7 @@ body {
 	<div class="col-sm-3">
 		<ul class="list-unstyled side-nav">
 			<li><a
-				href="<%=request.getContextPath()%>/Investorcontroller?actionCode=investorprofile&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Investorcontroller?actionCode=investorprofile&id=<%=reg.getId()%>"><i
 					class="fa fa-cogs"></i> Profile</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp"><i
@@ -175,7 +168,7 @@ body {
 				href="<%=request.getContextPath()%>/wp-content/Frontend/searchproposal.jsp"><i
 					class="fa fa-search"></i> Search Proposal</a></li>
 			<li><a
-				href="<%=request.getContextPath()%>/Feedbackcontroller?actionCode=getfeedback&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Feedbackcontroller?actionCode=getfeedback&id=<%=reg.getId()%>"><i
 					class="fa fa-search"></i> Feedback</a></li>
 		</ul>
 	</div>
@@ -229,16 +222,6 @@ body {
 
 	<hr>
 
-
-	<%
-	}
-	}
-	%>
-
-
-
-
-
 	<jsp:include page="footer.jsp"></jsp:include>
 
 	<!--                        <!--scripts and plugins -->
@@ -287,4 +270,3 @@ body {
 		type="text/javascript"></script>
 </body>
 </html>
-

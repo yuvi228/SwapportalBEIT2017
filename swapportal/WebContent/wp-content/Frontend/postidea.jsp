@@ -5,15 +5,9 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%
-List<Register> regg = (List<Register>) session.getAttribute("User");
+Register regi = (Register) session.getAttribute("Userdetails");
 %>
-<%
-if (!regg.isEmpty() && regg != null) {
-	Iterator<Register> it = regg.iterator();
-	Register regi = null;
-	while (it.hasNext()) {
-		regi = (Register) it.next();
-%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -233,7 +227,7 @@ label {
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Expected
 								Start Date</label> <input type="text" class="form-control datepicker"
-								value="2015-11-01" namae="esd">
+								value="2015-11-01" name="esd">
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Documentation
@@ -242,10 +236,7 @@ label {
 						</div>
 
 						<button type="submit" class="btn btn-theme-bg">Post</button>
-						<%
-						}
-						}
-						%>
+
 					</form>
 				</div>
 			</div>

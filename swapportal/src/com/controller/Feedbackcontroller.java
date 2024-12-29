@@ -10,13 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import comm.EmailUtility;
 import com.dao.Dao;
 import com.model.Feedback;
-import com.model.Ideaperson;
-import com.model.Investor;
-import com.model.Post;
 import com.model.Register;
+import com.util.Util;
 
 public class Feedbackcontroller extends HttpServlet {
 	Dao dao = new Dao();
@@ -79,7 +76,7 @@ public class Feedbackcontroller extends HttpServlet {
 			String content = "Thanks for your Valueable feedback. We will get back to you on this. ";
 			try {
 
-				EmailUtility.sendEmail(host, port, user, pass, email, subject, content);
+				Util.sendEmail(host, port, user, pass, email, subject, content);
 				resultMessage = "The e-mail was sent successfully";
 				System.out.println(resultMessage);
 			} catch (Exception ex) {
@@ -108,7 +105,7 @@ public class Feedbackcontroller extends HttpServlet {
 			String resultMessage = "";
 
 			try {
-				EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+				Util.sendEmail(host, port, user, pass, recipient, subject, content);
 				resultMessage = "The e-mail was sent successfully";
 				System.out.println(resultMessage);
 			} catch (Exception ex) {

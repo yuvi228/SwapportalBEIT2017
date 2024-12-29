@@ -5,15 +5,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-   List<Register> list = (List<Register>) session.getAttribute("User");
+   Register reg = (Register) session.getAttribute("Userdetails");
    %>
-<%
-          if(!list.isEmpty() && list!= null){
-				Iterator<Register> it = list.iterator();
-				Register regg = null;
-				while(it.hasNext()){
-				regg = (Register)it.next();
-   			%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -103,7 +97,7 @@ label {
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
 
-						<li><a href=""><i class="fa fa-lock"></i> Loggedin As <%=regg.getUsername()%></a></li>
+						<li><a href=""><i class="fa fa-lock"></i> Loggedin As <%=reg.getUsername()%></a></li>
 						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
@@ -185,24 +179,21 @@ label {
 					</h3>
 
 					<form role="form"
-						action="<%=request.getContextPath()%>/Ideapersoncontroller?id=<%=regg.getId()%>"
+						action="<%=request.getContextPath()%>/Ideapersoncontroller?id=<%=reg.getId()%>"
 						method="post" name="ideaperson" onsubmit="return validate()"
 						enctype="multipart/form-data">
 						<input type="hidden" name="actionCode" value="addIdeaperson">
 						<div class="form-group" class="col-2">
 							<label class="control-label">Email<font color=red>*</font></label>
 							<input type="text" Disabled class="form-control" name="email"
-								value="<%=regg.getEmail()%>" />
+								value="<%=reg.getEmail()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Name<font
 								color=red>*</font></label> <input type="text" Disabled
-								class="form-control" name="name" value="<%=regg.getName()%>" />
+								class="form-control" name="name" value="<%=reg.getName()%>" />
 						</div>
-						<%
-						}
-						}
-						%>
+
 
 
 						<div class="form-group">

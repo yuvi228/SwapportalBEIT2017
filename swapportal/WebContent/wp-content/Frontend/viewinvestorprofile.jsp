@@ -7,12 +7,8 @@
 
 <%
 // Retrieve session attributes
-List<Investor> inv = (List<Investor>) session.getAttribute("invprofile");
-List<Register> reg = (List<Register>) session.getAttribute("User");
-
-// Ensure the lists are non-null and non-empty
-boolean hasUser = (reg != null && !reg.isEmpty());
-boolean hasInvestor = (inv != null && !inv.isEmpty());
+Investor inv = (Investor) session.getAttribute("Investordata");
+Register reg = (Register) session.getAttribute("Userdata");
 %>
 
 <!DOCTYPE html>
@@ -59,7 +55,7 @@ boolean hasInvestor = (inv != null && !inv.isEmpty());
 			<div class="row">
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
-						<li><a href="#"><i class="fa fa-lock"></i> Welcome <%=hasUser ? reg.get(0).getUsername() : "Guest"%></a></li>
+						<li><a href="#"><i class="fa fa-lock"></i> Welcome <%=reg.getUsername()%></a></li>
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
 					</ul>
@@ -95,7 +91,7 @@ boolean hasInvestor = (inv != null && !inv.isEmpty());
 	<div class="col-sm-3 margin40">
 		<ul class="list-unstyled side-nav">
 			<li><a
-				href="<%=request.getContextPath()%>/Investorcontroller?actionCode=editinvestor&id=<%=hasUser ? reg.get(0).getId() : ""%>"><i
+				href="<%=request.getContextPath()%>/Investorcontroller?actionCode=editinvestor&id=<%=reg.getId()%>"><i
 					class="fa fa-cogs"></i> Edit Profile</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp"><i
@@ -112,53 +108,44 @@ boolean hasInvestor = (inv != null && !inv.isEmpty());
 				style="background: url('assets/images/gallery/music-4.jpg') center center no-repeat;">
 
 				<div class="profile-image" style="border-radius: 50%; float: left;">
-					<%
-					if (hasUser) {
-						Register regi = reg.get(0); // Get the first user
-						Integer id = regi.getId();
-					%>
+
 					<img
-						src="<%=request.getContextPath()%>/Investorcontroller?actionCode=getallinvestorImage&id=<%=id%>&format=jpg"
+						src="<%=request.getContextPath()%>/Investorcontroller?actionCode=getallinvestorImage&id=<%=reg.getId()%>&format=jpg"
 						style="width: 150px; height: 150px; margin: 0px auto;">
 
 					<div class="profile-data-name">
-						<h3><%=regi.getName()%></h3>
+						<h3><%=reg.getName()%></h3>
 					</div>
 				</div>
 
 				<div class="profile-data" style="float: left; margin-left: 100px">
 					<div class="profile-data-name">
 						<h4>
-							<i>Phone:-</i><%=regi.getPhone()%></h4>
+							<i>Phone:-</i><%=reg.getPhone()%></h4>
 					</div>
 					<div class="profile-data-title">
 						<h4>
-							<i>Email:-</i><%=regi.getEmail()%></h4>
+							<i>Email:-</i><%=reg.getEmail()%></h4>
 					</div>
 				</div>
-				<%
-				}
-				%>
+
 
 				<div class="profile-data" style="float: right; margin-right: 100px;">
-					<%
-					if (hasInvestor) {
-						Investor inve = inv.get(0); // Get the first investor
-					%>
+
 					<div class="profile-data-name">
 						<h4>
-							<i>Type:-</i><%=inve.getType()%></h4>
+							<i>Type:-</i><%=inv.getType()%></h4>
 					</div>
 					<div class="profile-data-title">
 						<h5>
-							<i>Area Of Interest:-</i><%=inve.getAreaofinterest()%></h5>
+							<i>Area Of Interest:-</i><%=inv.getAreaofinterest()%></h5>
 					</div>
 					<div class="profile-controls">
-						<a href="<%=inve.getTw()%>" class="profile-control-left twitter"><span
+						<a href="<%=inv.getTw()%>" class="profile-control-left twitter"><span
 							class="fa fa-twitter fa-2x"></span></a>&nbsp;&nbsp;&nbsp; <a
-							href="<%=inve.getFb()%>" class="profile-control-center facebook"><span
+							href="<%=inv.getFb()%>" class="profile-control-center facebook"><span
 							class="fa fa-facebook fa-2x"></span></a>&nbsp;&nbsp;&nbsp; <a
-							href="<%=inve.getGg()%>" class="profile-control-right googleplus"><span
+							href="<%=inv.getGg()%>" class="profile-control-right googleplus"><span
 							class="fa fa-google-plus fa-2x"></span></a>
 					</div>
 				</div>
@@ -169,45 +156,43 @@ boolean hasInvestor = (inv != null && !inv.isEmpty());
 							<tr>
 								<td width="20%" align="right"><label
 									class="col-md-12 col-xs-12 control-label">Registered ID</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=inve.getId()%></label></td>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=inv.getId()%></label></td>
 							</tr>
 							<tr>
 								<td width="20%" align="right"><label
 									class="col-md-12 col-xs-12 control-label">Investing
 										Amount</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=inve.getInvestingamount()%></label></td>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=inv.getInvestingamount()%></label></td>
 							</tr>
 							<tr>
 								<td width="20%" align="right"><label
 									class="col-md-12 col-xs-12 control-label">Address1</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=inve.getAddress1()%></label></td>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=inv.getAddress1()%></label></td>
 							</tr>
 							<tr>
 								<td align="right"><label
 									class="col-md-12 col-xs-12 control-label">Address2</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=inve.getAddress2()%></label></td>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=inv.getAddress2()%></label></td>
 							</tr>
 							<tr>
 								<td align="right"><label
 									class="col-md-12 col-xs-12 control-label">Street</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=inve.getStreet()%></label></td>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=inv.getStreet()%></label></td>
 							</tr>
 							<tr>
 								<td align="right"><label
 									class="col-md-12 col-xs-12 control-label">City</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=inve.getCity()%></label></td>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=inv.getCity()%></label></td>
 							</tr>
 							<tr>
 								<td align="right"><label
 									class="col-md-12 col-xs-12 control-label">Country</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=inve.getCountry()%></label></td>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=inv.getCountry()%></label></td>
 							</tr>
 						</table>
 					</font>
 				</center>
-				<%
-				}
-				%>
+
 			</div>
 		</div>
 	</div>

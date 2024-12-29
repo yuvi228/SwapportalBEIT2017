@@ -6,25 +6,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-  List<Investor> inv = (List<Investor>) session.getAttribute("Investor");
+  Investor inv = (Investor) session.getAttribute("Investordata");
   %>
+
 <%
-          if(!inv.isEmpty() && inv!= null){
-				Iterator<Investor> it = inv.iterator();
-				Investor inve = null;
-				while(it.hasNext()){
-				inve = (Investor)it.next();
-   			%>
-<%
-   				List<Register> regg = (List<Register>) session.getAttribute("User");
-   				%>
-<%
-   					if(!regg.isEmpty() && regg!= null){
-					Iterator<Register> itr = regg.iterator();
-					Register regi = null;
-					while(itr.hasNext()){
-					regi = (Register)itr.next();
-   				%>
+  Register reg = (Register) session.getAttribute("Userdata");
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -113,7 +101,7 @@ label {
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
 
-						<li><a href=""><i class="fa fa-lock"></i> Welcome As <%=regi.getUsername()%></a></li>
+						<li><a href=""><i class="fa fa-lock"></i> Welcome As <%=reg.getUsername()%></a></li>
 						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
 
 						<li><a class="topbar-icons" href="#"><span><i
@@ -180,7 +168,7 @@ label {
 
 
 					<form role="form"
-						action="<%=request.getContextPath()%>/Investorcontroller?iid=<%=inve.getIid()%>&id=<%=inve.getId()%>"
+						action="<%=request.getContextPath()%>/Investorcontroller?iid=<%=inv.getIid()%>&id=<%=inv.getId()%>"
 						method="post" name="investor" onsubmit="return validate()"
 						enctype="multipart/form-data">
 						<input type="hidden" name="actionCode" value="updateInvestor">
@@ -189,26 +177,23 @@ label {
 							<label class="col-md-3 col-xs-12 control-label">Register
 								Id<font color=red>*</font>
 							</label> <input type="text" Disabled class="form-control" name="regid"
-								value="<%=inve.getId()%>" />
+								value="<%=inv.getId()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Name<font
 								color=red>*</font></label> <input type="text" Disabled
-								class="form-control" name="name" value="<%=regi.getName()%>" />
+								class="form-control" name="name" value="<%=reg.getName()%>" />
 						</div>
-						<%
-						}
-						}
-						%>
+
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Select
 								your type<font color=red>*</font>
 							</label> <select class="form-control select" name="st">
 								<option>Select Type</option>
 								<option value="Individual"
-									<%="Individual".equals(inve.getType()) ? "selected" : ""%>>Individual</option>
+									<%="Individual".equals(inv.getType()) ? "selected" : ""%>>Individual</option>
 								<option value="Company"
-									<%="Company".equals(inve.getType()) ? "selected" : ""%>>Company</option>
+									<%="Company".equals(inv.getType()) ? "selected" : ""%>>Company</option>
 							</select>
 						</div>
 
@@ -219,10 +204,10 @@ label {
 								<option>Select Industry</option>
 
 								<option value="Computer Hardware"
-									<%="Computer Hardware".equals(inve.getAreaofinterest()) ? "selected" : ""%>>Computer
+									<%="Computer Hardware".equals(inv.getAreaofinterest()) ? "selected" : ""%>>Computer
 									Hardware</option>
 								<option value="Computer Software"
-									<%="Computer Software".equals(inve.getAreaofinterest()) ? "selected" : ""%>>Computer
+									<%="Computer Software".equals(inv.getAreaofinterest()) ? "selected" : ""%>>Computer
 									Software</option>
 
 							</select>
@@ -233,63 +218,60 @@ label {
 							<label class="col-md-3 col-xs-12 control-label">Investing
 								Amount<font color=red>*</font>
 							</label> <input type="text" class="form-control" name="inam"
-								value="<%=inve.getInvestingamount()%>" />
+								value="<%=inv.getInvestingamount()%>" />
 						</div>
 
 
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Addressline1<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="adrs1" value="<%=inve.getAddress1()%>" />
+								name="adrs1" value="<%=inv.getAddress1()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Addressline2<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="adrs2" value="<%=inve.getAddress2()%>" />
+								name="adrs2" value="<%=inv.getAddress2()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Street<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="street" value="<%=inve.getStreet()%>" />
+								name="street" value="<%=inv.getStreet()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">City<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="city" value="<%=inve.getCity()%>" />
+								name="city" value="<%=inv.getCity()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Country<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="country" value="<%=inve.getCountry()%>" />
+								name="country" value="<%=inv.getCountry()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Map<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="mp" value="<%=inve.getMap()%>" />
+								name="mp" value="<%=inv.getMap()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Facebook_url<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="fb" value="<%=inve.getFb()%>" />
+								name="fb" value="<%=inv.getFb()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Twitter_url<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="tw" value="<%=inve.getTw()%>" />
+								name="tw" value="<%=inv.getTw()%>" />
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-xs-12 control-label">Google+_url<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="gg" value="<%=inve.getGg()%>" />
+								name="gg" value="<%=inv.getGg()%>" />
 						</div>
 
 						<button type="submit" class="btn btn-theme-bg">Update</button>
 
 					</form>
-					<%
-					}
-					}
-					%>
+
 
 				</div>
 			</div>

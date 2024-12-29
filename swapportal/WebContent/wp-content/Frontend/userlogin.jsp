@@ -190,7 +190,6 @@ to {
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/registration.js"></script>
-
 	<script>
         // Display Toast Notification if an error message is present
         window.onload = function() {

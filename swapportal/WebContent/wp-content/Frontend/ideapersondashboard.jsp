@@ -6,19 +6,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	List<Investor> list = (List<Investor>) session.getAttribute("Investor");
+	List<Investor> list = (List<Investor>) session.getAttribute("Investorlist");
 %>
 
 <%
-	List<Register> regg = (List<Register>) session.getAttribute("User");
+	Register reg = (Register) session.getAttribute("Userdetail");
 %>
-<%
-	if (!regg.isEmpty() && regg != null) {
-		Iterator<Register> it = regg.iterator();
-		Register regi = null;
-		while (it.hasNext()) {
-			regi = (Register) it.next();
-%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -102,7 +96,7 @@
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
 
-						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regi.getUsername()%></a></li>
+						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=reg.getUsername()%></a></li>
 						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
@@ -145,24 +139,21 @@
 			<!-- 					class="fa fa-dashboard"></i> Dashboard</a></li> -->
 
 			<li><a
-				href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=ideapersonprofile&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=ideapersonprofile&id=<%=reg.getId()%>"><i
 					class="fa fa-cogs"></i>Profile</a></li>
 
 			<li><a
-				href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=uploadidea&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=uploadidea&id=<%=reg.getId()%>"><i
 					class="fa fa-upload"></i>Upload New Idea</a></li>
 
 			<li><a
-				href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=viewIdea&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=ListOfIdeasForCurrentUser&id=<%=reg.getId()%>"><i
 					class="fa fa-history"></i> Idea Repository</a></li>
 			<li><a
-				href="<%=request.getContextPath()%>/Feedbackcontroller?actionCode=getfeedback&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Feedbackcontroller?actionCode=getfeedback&id=<%=reg.getId()%>"><i
 					class="fa fa-dashboard"></i> Feedback</a></li>
 
-			<%
-			}
-			}
-			%>
+
 
 
 		</ul>
@@ -188,7 +179,6 @@
 						class="img-fluid rounded-circle" alt="Investor Image"
 						style="width: 150px; height: 150px;"
 						onerror="this.onerror=null; this.src='<%=request.getContextPath()%>/Image/default_image_investor.jpeg';" />
-
 					<div class="profile-controls mt-4" style="margin-top: 20px;">
 						<a href="<%=inv.getTw()%>"
 							class="profile-control-left twitter me-2"> <span

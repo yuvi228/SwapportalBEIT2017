@@ -5,22 +5,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <% 
-   				List<Ideaperson> person = (List<Ideaperson>) session.getAttribute("Ideaperson");
+   				Ideaperson ideaperson = (Ideaperson) session.getAttribute("Ideapersondetails");
 				%>
 
 
 <%
-   				List<Register> regg = (List<Register>) session.getAttribute("User");
+   				Register regg = (Register) session.getAttribute("Userdetails");
    				%>
-
-<%
-   					if(!regg.isEmpty() && regg!= null){
-					Iterator<Register> it = regg.iterator();
-					Register regi = null;
-					while(it.hasNext()){
-					regi = (Register)it.next();
-   				%>
-
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -104,7 +95,7 @@
 				<div class="col-sm-8 text-right">
 					<ul class="list-inline top-dark-right">
 
-						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regi.getUsername()%></a></li>
+						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regg.getUsername()%></a></li>
 						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
@@ -145,7 +136,7 @@
 	<div class="col-sm-3 margin40">
 		<ul class="list-unstyled side-nav">
 			<li><a
-				href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=editideaperson&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=editideaperson&id=<%=regg.getId()%>"><i
 					class="fa fa-user"></i>Edit Profile</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/wp-content/Frontend/ideapersondashboard.jsp"><i
@@ -162,13 +153,13 @@
 
 				<div class="profile-image" style="border-radius: 50%; float: left;">
 					<%
-					Integer id = regi.getId();
+					Integer id = regg.getId();
 					%>
 					<img height="80px" width="180px"
 						src="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=getallideapersonImage&id=<%=id%>&format=jpg"
 						" alt="">
 					<div class="profile-data-name">
-						<h3><%=regi.getName()%></h3>
+						<h3><%=regg.getName()%></h3>
 					</div>
 				</div>
 				<div class="profile-data" style="float: left; margin-left: 100px">
@@ -176,42 +167,36 @@
 					<div class="profile-data-name">
 						<h4>
 							<i>Phone:-</i>
-							<%=regi.getPhone()%></h4>
+							<%=regg.getPhone()%></h4>
 					</div>
 					<div class="profile-data-title">
 						<h4>
 							<i>Email:-</i>
-							<%=regi.getEmail()%></h4>
+							<%=regg.getEmail()%></h4>
 					</div>
 				</div>
-				<%
-				}
-				}
-				%>
+
 				<div class="profile-data" style="float: right; margin-right: 100px;">
 
 
-					<%
-					if (!person.isEmpty() && person != null) {
-						Iterator<Ideaperson> itr = person.iterator();
-						Ideaperson idd = null;
-						while (itr.hasNext()) {
-							idd = (Ideaperson) itr.next();
-					%>
+
 
 
 					<div class="profile-data-name">
 						<h4>
 							<i>Type:-</i>
-							<%=idd.getType()%></h4>
+							<%=ideaperson.getType()%></h4>
 					</div>
 					<%--                                         <div class="profile-data-title"><%=inve.getAreaofinterest() %></div> --%>
 					<div class="profile-controls">
-						<a href="<%=idd.getTw()%>" class="profile-control-left twitter"><span
+						<a href="<%=ideaperson.getTw()%>"
+							class="profile-control-left twitter"><span
 							class="fa fa-twitter fa-2x"></span></a>&nbsp; &nbsp;&nbsp; <a
-							href="<%=idd.getFb()%>" class="profile-control-center facebook"><span
+							href="<%=ideaperson.getFb()%>"
+							class="profile-control-center facebook"><span
 							class="fa fa-facebook fa-2x"></span></a>&nbsp; &nbsp;&nbsp; <a
-							href="<%=idd.getGg()%>" class="profile-control-right googleplus"><span
+							href="<%=ideaperson.getGg()%>"
+							class="profile-control-right googleplus"><span
 							class="fa fa-google-plus fa-2x"></span></a>
 					</div>
 				</div>
@@ -225,58 +210,58 @@
 								<td width="20%" align="right"><label
 									class="col-md-12 col-xs-12 control-label"> Registered
 										ID</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getId()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getId()%></label>
 								</td>
 							</tr>
 							<tr>
 								<td width="20%" align="right"><label
 									class="col-md-12 col-xs-12 control-label">About You</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getAboutyou()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getAboutyou()%></label>
 								</td>
 							</tr>
 							<tr>
 								<td width="20%" align="right"><label
 									class="col-md-12 col-xs-12 control-label">Project
 										Abstract</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getProjectabstract()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getProjectabstract()%></label>
 								</td>
 							</tr>
 							<tr>
 								<td width="20%" align="right"><label
 									class="col-md-12 col-xs-12 control-label">Expected
 										Funding</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getExpectfund()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getExpectfund()%></label>
 								</td>
 							</tr>
 							<tr>
 								<td width="20%" align="right"><label
 									class="col-md-12 col-xs-12 control-label">Address1</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getAddress1()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getAddress1()%></label>
 								</td>
 							</tr>
 							<tr>
 								<td align="right"><label
 									class="col-md-12 col-xs-12 control-label">Address2</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getAddress2()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getAddress2()%></label>
 								</td>
 							</tr>
 
 							<tr>
 								<td align="right"><label
 									class="col-md-12 col-xs-12 control-label">Street</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getStreet()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getStreet()%></label>
 								</td>
 							</tr>
 							<tr>
 								<td align="right"><label
 									class="col-md-12 col-xs-12 control-label">City</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getCity()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getCity()%></label>
 								</td>
 							</tr>
 							<tr>
 								<td align="right"><label
 									class="col-md-12 col-xs-12 control-label">Country</label></td>
-								<td><label class="col-md-12 col-xs-12 control-label"><%=idd.getCountry()%></label>
+								<td><label class="col-md-12 col-xs-12 control-label"><%=ideaperson.getCountry()%></label>
 								</td>
 							</tr>
 
@@ -289,10 +274,6 @@
 
 	</div>
 
-	<%
-	}
-	}
-	%>
 
 	<jsp:include page="footer.jsp"></jsp:include>
 

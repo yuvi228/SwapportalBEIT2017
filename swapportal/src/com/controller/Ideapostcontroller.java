@@ -3,41 +3,17 @@ package com.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import comm.EmailUtility;
 import com.dao.Dao;
-import com.model.Feedback;
-import com.model.Ideaperson;
-import com.model.Investor;
 import com.model.Post;
 import com.model.Register;
 
 public class Ideapostcontroller extends HttpServlet {
 	Dao dao = new Dao();
-	// RequestDispatcher dispatcher;
-
-	// SEND EMAIL START
-	private String host;
-	private String port;
-	private String user;
-	private String pass;
-
-	public void init() {
-
-		// reads SMTP server setting from web.xml file
-		ServletContext context = getServletContext();
-		host = context.getInitParameter("host");
-		port = context.getInitParameter("port");
-		user = context.getInitParameter("user");
-		pass = context.getInitParameter("pass");
-	}
-	// SEND EMAIL END
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,25 +27,25 @@ public class Ideapostcontroller extends HttpServlet {
 		final String basePath = request.getContextPath() + "/wp-content/Frontend/";
 
 		// Get all Post Table Data
-		if (actioncode.equals("getallIdea")) {
+		if (actioncode.equals("ListOfIdeasOfAllUsers")) {
 			List<Post> allPost = dao.doloadPost();
 			session.setAttribute("Post", allPost);
 			response.sendRedirect(basePath + "ideadetails.jsp");
 		}
 
 		if (actioncode.equals("updateIdea")) {
-			id = Integer.parseInt(request.getParameter("id"));
-			List<Post> postbyid = dao.getpostById(id);
+			id = Integer.parseInt(request.getParameter("pid"));
+			Post postbyid = dao.getIdeaPostByPostId(id);
 			request.getSession(false).setAttribute("Idea", postbyid);
 			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/editidea.jsp");
 		}
 
-		if (actioncode.equals("viewIdea")) {
+		if (actioncode.equals("ListOfIdeasForCurrentUser")) {
 			id = Integer.parseInt(request.getParameter("id"));
-			List<Register> lista = dao.getRegisterData(id);
-			request.getSession(false).setAttribute("User", lista);
-			List<Post> postbyid = dao.getpostById(id);
-			request.getSession(false).setAttribute("Idea", postbyid);
+			Register lista = dao.getUserdataById(id);
+			request.getSession(false).setAttribute("Userdetails", lista);
+			List<Post> postbyIdeaperson = dao.getListOfIdeaPostsByUserId(id);
+			request.getSession(false).setAttribute("PostsbyIdeaperson", postbyIdeaperson);
 			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewidea.jsp");
 		}
 
@@ -81,7 +57,7 @@ public class Ideapostcontroller extends HttpServlet {
 			stats = dao.dodeletePost(post);
 			if (stats.equals("success")) {
 				List<Post> allpost = dao.doloadPost();
-				request.getSession(false).setAttribute("Idea", allpost);
+				request.getSession(false).setAttribute("Post", allpost);
 				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideadetails.jsp");
 
 			}
@@ -115,8 +91,12 @@ public class Ideapostcontroller extends HttpServlet {
 				pid = dao.doaddPost(post);
 
 				if (pid.intValue() > 0) {
-					java.util.List<Post> posti = dao.getpostById(id);
-					request.getSession(false).setAttribute("Idea", posti);
+
+					Register register = dao.getUserdataById(id);
+					request.getSession(false).setAttribute("Userdetails", register);
+
+					List<Post> postdetails = dao.getListOfIdeaPostsByUserId(id);
+					request.getSession(false).setAttribute("PostsbyIdeaperson", postdetails);
 					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewidea.jsp");
 
 				}
@@ -127,7 +107,7 @@ public class Ideapostcontroller extends HttpServlet {
 
 		// closed Post Idea
 		// Update Idea
-		if (actioncode.equals("updateIdea")) {
+		if (actioncode.equals("updateIdeaFromAdminPanel")) {
 			String definition = request.getParameter("pd");
 			String title = request.getParameter("pt");
 			String keyword = request.getParameter("pk");
@@ -153,9 +133,9 @@ public class Ideapostcontroller extends HttpServlet {
 
 			stats = dao.doupdatePost(post);
 			if (stats.equals("success")) {
-				List<Post> list = dao.getpostById(id);
-				request.getSession(false).setAttribute("Idea", list);
-				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewidea.jsp");
+				List<Post> list = dao.doloadPost();
+				request.getSession(false).setAttribute("Post", list);
+				response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideadetails.jsp");
 			}
 
 		}

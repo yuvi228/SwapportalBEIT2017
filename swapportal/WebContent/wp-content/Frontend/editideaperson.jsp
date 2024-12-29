@@ -6,25 +6,13 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%
-  List<Ideaperson> inv = (List<Ideaperson>) session.getAttribute("Ideaperson");
-  %>
+  Ideaperson ideaperson = (Ideaperson) session.getAttribute("Ideapersondetails");
+%>
+
 <%
-          if(!inv.isEmpty() && inv!= null){
-				Iterator<Ideaperson> it = inv.iterator();
-				Ideaperson ideaperson = null;
-				while(it.hasNext()){
-				ideaperson = (Ideaperson)it.next();
-   			%>
-<%
-   				List<Register> regg = (List<Register>) session.getAttribute("User");
-   				%>
-<%
-   					if(!regg.isEmpty() && regg!= null){
-					Iterator<Register> itr = regg.iterator();
-					Register regi = null;
-					while(itr.hasNext()){
-					regi = (Register)itr.next();
-   				%>
+   				Register regi = (Register) session.getAttribute("Userdetails");
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -115,11 +103,7 @@ label {
 					<ul class="list-inline top-dark-right">
 
 						<li><a href=""><i class="fa fa-lock"></i> Welcome As <%=regi.getUsername()%></a></li>
-						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
-						<%
-						}
-						}
-						%>
+
 						<li><a class="topbar-icons" href="#"><span><i
 									class="fa fa-search top-search"></i></span></a></li>
 					</ul>
@@ -272,10 +256,7 @@ label {
 						<!--                         <a href="#" class="btn btn-fb-login"><i class="fa fa-facebook"></i> Login With Facebook</a> -->
 						<!--                         <a href="#">Forget Password?</a> -->
 
-						<%
-						}
-						}
-						%>
+
 					</form>
 				</div>
 			</div>

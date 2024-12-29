@@ -11,13 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import comm.EmailUtility;
 import com.dao.Dao;
-import com.model.Feedback;
 import com.model.Ideaperson;
 import com.model.Investor;
-import com.model.Post;
 import com.model.Register;
+import com.util.Util;
 
 public class Authcontroller extends HttpServlet {
 	Dao dao = new Dao();
@@ -75,6 +73,9 @@ public class Authcontroller extends HttpServlet {
 			if (status.equals("success")) {
 				List<Register> deleteuser = dao.doloadRegister();
 				request.getSession(false).setAttribute("Registration", deleteuser);
+				request.setAttribute("successDeleteMessage", "User delete successfully!");
+				// request.getRequestDispatcher("/wp-content/Frontend/userlogin.jsp").forward(request,
+				// response);
 				response.sendRedirect(basePath + "registerdetails.jsp");
 			}
 		}
@@ -126,28 +127,32 @@ public class Authcontroller extends HttpServlet {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 
-			if (email.trim().length() >= 0 && email != null && password.trim().length() >= 0 && password != null) {
-				boolean result = dao.authenticateLoginUser(email, password);
-				if (result == true) {
-					Register reg = dao.getUserdatabyEmail(email);
-					List<Register> lista1 = dao.getUserBy(email);
-					request.getSession(false).setAttribute("User", lista1);
+			// Validate input
+			if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+				request.setAttribute("errorMessage", "Email and password must not be empty.");
+				request.getRequestDispatcher("/wp-content/Frontend/userlogin.jsp").forward(request, response);
+				return;
+			}
 
-					if (reg.getType().equals("Investor") && reg.getType() != null) {
-						List<Ideaperson> person = dao.doloadIdeaperson();
-						request.getSession(false).setAttribute("Ideaperson", person);
-						response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investordashboard.jsp");
-					} else {
-						List<Investor> list = dao.doloadInvestor();
-						request.getSession(false).setAttribute("Investor", list);
-						response.sendRedirect(
-								request.getContextPath() + "/wp-content/Frontend/ideapersondashboard.jsp");
-					}
+			Register reg = dao.getRegisterUserIfAvailable(email, password);
+			if (reg != null) {
+				request.getSession(false).setAttribute("Userdetail", reg);
+
+				String userType = reg.getType();
+				if (userType.equals("Investor") && userType != null) {
+					List<Ideaperson> ideapersonList = dao.doloadIdeaperson();
+					request.getSession(false).setAttribute("Ideapersonlist", ideapersonList);
+					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investordashboard.jsp");
 				} else {
-					request.setAttribute("errorMessage", "Invalid username or password!");
-					request.getRequestDispatcher("/wp-content/Frontend/userlogin.jsp").forward(request, response);
+					List<Investor> investorList = dao.doloadInvestor();
+					request.getSession(false).setAttribute("Investorlist", investorList);
+					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersondashboard.jsp");
 				}
 
+			} else {
+				request.setAttribute("errorMessage", "Your account is not registered on Swapportal");
+				request.getRequestDispatcher("/wp-content/Frontend/userlogin.jsp").forward(request, response);
+				return;
 			}
 
 		}
@@ -155,14 +160,16 @@ public class Authcontroller extends HttpServlet {
 		// LOGIN END
 
 		// SEND EMAIL START
-		if (actioncode.equals("emailCompose")) {
+		if (actioncode.equals("emailCompose"))
+
+		{
 			String recipient = request.getParameter("recipient");
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 			String resultMessage = "";
 
 			try {
-				EmailUtility.sendEmail(host, port, user, pass, recipient, subject, content);
+				Util.sendEmail(host, port, user, pass, recipient, subject, content);
 				resultMessage = "The e-mail was sent successfully";
 				System.out.println(resultMessage);
 			} catch (Exception ex) {
@@ -190,7 +197,7 @@ public class Authcontroller extends HttpServlet {
 				String content = "Your password is " + reg.getPassword();
 				try {
 
-					EmailUtility.sendEmail(host, port, user, pass, email, subject, content);
+					Util.sendEmail(host, port, user, pass, email, subject, content);
 					resultMessage = "The e-mail was sent successfully";
 					System.out.println(resultMessage);
 				} catch (Exception ex) {

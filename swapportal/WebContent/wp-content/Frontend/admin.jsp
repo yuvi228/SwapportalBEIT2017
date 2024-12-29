@@ -19,10 +19,9 @@
 </head>
 <body style="background-attachment: fixed;"
 	background="<%=request.getContextPath()%>/Image/bg.jpg">
-	<jsp:include page="header.jsp"></jsp:include>
 
 
-	<!-- Breadcrumb -->
+
 	<div class="breadcrumb-wrap">
 		<div class="container">
 			<div class="row">
@@ -49,7 +48,7 @@
 					href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=getallIdeaperson"><i
 						class="fa fa-dashboard fa-5x"></i><br>Idea Person Profiles</a></td>
 				<td><a
-					href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=getallIdea"><i
+					href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=ListOfIdeasOfAllUsers"><i
 						class="fa fa-cogs fa-5x"></i><br>Manage Ideas</a></td>
 			</tr>
 			<tr>

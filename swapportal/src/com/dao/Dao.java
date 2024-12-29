@@ -18,33 +18,6 @@ public class Dao {
 	Session session = null;
 	Transaction tx = null;
 
-	public boolean register(Register reg) {
-		try (Session session = sessionfactory.openSession()) {
-			if (isUserExists(session, reg.getEmail())) {
-				return false; // User already exists
-			}
-			Transaction tx = null;
-			try {
-				tx = session.beginTransaction();
-				session.save(reg);
-				tx.commit();
-				return true; // User registered successfully
-			} catch (Exception e) {
-				if (tx != null) {
-					tx.rollback();
-				}
-				System.out.println("Error occurred while registering user" + e);
-				throw e;
-			}
-		}
-	}
-
-	public boolean isUserExists(Session session, String email) {
-		String hql = "select count(*) from Register where email = :email";
-		Long count = (Long) session.createQuery(hql).setParameter("email", email).uniqueResult();
-		return count > 0;
-	}
-
 	// Get All User(Register Table)data
 	public List<Register> doloadRegister() {
 		session = sessionfactory.openSession();
@@ -343,7 +316,7 @@ public class Dao {
 	}
 
 	// Post
-	public List<Post> getpostById(Integer id) {
+	public List<Post> getListOfIdeaPostsByUserId(Integer id) {
 		session = sessionfactory.openSession();
 		try {
 			String hql = "FROM Post r WHERE r.id = :id";
@@ -516,7 +489,7 @@ public class Dao {
 		return inv;
 	}
 
-	public Ideaperson getPersonById(Integer id) {
+	public Ideaperson getIdeaPersonById(Integer id) {
 		session = sessionfactory.openSession();
 		Transaction tx = null;
 		Ideaperson person = null;
@@ -537,6 +510,52 @@ public class Dao {
 			}
 		}
 		return person;
+	}
+
+	public Post getIdeaPostByUserId(Integer id) {
+		session = sessionfactory.openSession();
+		Transaction tx = null;
+		Post post = null;
+		try {
+			tx = session.beginTransaction();
+			Query query = session.createQuery("from Post where id = :id");
+			query.setParameter("id", id);
+			post = (Post) query.uniqueResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return post;
+	}
+	
+	public Post getIdeaPostByPostId(Integer pid) {
+		session = sessionfactory.openSession();
+		Transaction tx = null;
+		Post post = null;
+		try {
+			tx = session.beginTransaction();
+			Query query = session.createQuery("from Post where pid = :pid");
+			query.setParameter("pid", pid);
+			post = (Post) query.uniqueResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return post;
 	}
 
 	public Ideaperson getPersonById(Session session, Integer id) {
@@ -562,6 +581,34 @@ public class Dao {
 		return person;
 	}
 
+	// Auth module
+	public boolean register(Register reg) {
+		try (Session session = sessionfactory.openSession()) {
+			if (isUserExists(session, reg.getEmail())) {
+				return false; // User already exists
+			}
+			Transaction tx = null;
+			try {
+				tx = session.beginTransaction();
+				session.save(reg);
+				tx.commit();
+				return true; // User registered successfully
+			} catch (Exception e) {
+				if (tx != null) {
+					tx.rollback();
+				}
+				System.out.println("Error occurred while registering user" + e);
+				throw e;
+			}
+		}
+	}
+
+	public boolean isUserExists(Session session, String email) {
+		String hql = "select count(*) from Register where email = :email";
+		Long count = (Long) session.createQuery(hql).setParameter("email", email).uniqueResult();
+		return count > 0;
+	}
+
 	public boolean authenticateUser(String email) {
 		Register reg = getUserdatabyEmail(email);
 		if (reg != null && reg.getEmail().equals(email)) {
@@ -571,9 +618,7 @@ public class Dao {
 		}
 	}
 
-	// Login Service
 	public boolean authenticateLoginUser(String email, String password) {
-
 		Register reg = getUserdatabyEmail(email);
 		if (reg != null && reg.getEmail().equals(email) && reg.getPassword().equals(password)) {
 			return true;
@@ -582,24 +627,16 @@ public class Dao {
 		}
 	}
 
-	public boolean authenticateInvestor(Integer id) {
-		Investor inv = getInvestorById1(id);
-		if (inv != null) {
-			return true;
-		} else {
-			return false;
-		}
-
+	public Register getRegisterUserIfAvailable(String email, String password) {
+		return getUserdatabyEmail(email);
 	}
 
-	public boolean authenticateIdeaperson(Integer id) {
-		Ideaperson person = getPersonById(id);
-		if (person != null) {
-			return true;
-		} else {
-			return false;
-		}
+	public Investor getInvestorProfileIfAvailable(Integer id) {
+		return getInvestorById1(id); // Return the object directly
+	}
 
+	public Ideaperson getIdeapersonIfAvailable(Integer id) {
+		return getIdeaPersonById(id);
 	}
 
 }

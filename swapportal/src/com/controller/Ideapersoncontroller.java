@@ -38,17 +38,17 @@ public class Ideapersoncontroller extends HttpServlet {
 
 		final String basePath = request.getContextPath() + "/wp-content/Frontend/";
 
-		// Get all Ideaperson Table data
 		if (actioncode.equals("getallIdeaperson")) {
 			List<Ideaperson> allideaperson = dao.doloadIdeaperson();
 			session.setAttribute("Ideaperson", allideaperson);
 			response.sendRedirect(basePath + "ideapersonprofiledata.jsp");
 		}
 		if (actioncode.equals("editideaperson")) {
-
 			id = Integer.parseInt(request.getParameter("id"));
-			List<Ideaperson> person = dao.getIdeapersonById(id);
-			request.getSession(false).setAttribute("Ideaperson", person);
+			Ideaperson ideaperson = dao.getIdeaPersonById(id);
+			request.getSession(false).setAttribute("Ideapersondetails", ideaperson);
+			Register register = dao.getUserdataById(id);
+			request.getSession(false).setAttribute("Userdetails", register);
 			response.sendRedirect(basePath + "editideaperson.jsp");
 		}
 		if ("getallideapersonImage".equals(actioncode)) {
@@ -62,14 +62,13 @@ public class Ideapersoncontroller extends HttpServlet {
 		}
 		if (actioncode.equals("ideapersonprofile")) {
 			id = Integer.parseInt(request.getParameter("id"));
-			boolean result = dao.authenticateIdeaperson(id);
-			List<Register> register = dao.getRegisterData(id);
-			request.getSession(false).setAttribute("User", register);
-			List<Ideaperson> ideaperson = dao.getIdeapersonById(id);
-			request.getSession(false).setAttribute("Ideaperson", ideaperson);
+			Ideaperson ideaperson = dao.getIdeapersonIfAvailable(id);
+			request.getSession(false).setAttribute("Ideapersondetails", ideaperson);
 
-			if (result == true) {
+			Register register = dao.getUserdataById(id);
+			request.getSession(false).setAttribute("Userdetails", register);
 
+			if (ideaperson != null) {
 				response.sendRedirect(basePath + "viewideapersonprofile.jsp");
 			} else {
 
@@ -77,10 +76,13 @@ public class Ideapersoncontroller extends HttpServlet {
 			}
 		}
 		if (actioncode.equals("uploadidea")) {
-
 			id = Integer.parseInt(request.getParameter("id"));
-			List<Ideaperson> person = dao.getIdeapersonById(id);
-			request.getSession(false).setAttribute("Ideaperson", person);
+
+			Register register = dao.getUserdataById(id);
+			request.getSession(false).setAttribute("Userdetails", register);
+
+			Ideaperson person = dao.getIdeaPersonById(id);
+			request.getSession(false).setAttribute("Ideapersondetails", person);
 			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/postidea.jsp");
 		}
 	}
@@ -166,7 +168,7 @@ public class Ideapersoncontroller extends HttpServlet {
 		String tw = request.getParameter("tw");
 		String gg = request.getParameter("gg");
 
-		Ideaperson ideaperson = dao.getPersonById(id);
+		Ideaperson ideaperson = dao.getIdeaPersonById(id);
 
 		Ideaperson updatedData = new Ideaperson(ipid, id, type, aboutyou, projectabstract, expfund, adrs1, adrs2,
 				street, city, country, fb, tw, gg);
@@ -249,17 +251,16 @@ public class Ideapersoncontroller extends HttpServlet {
 
 	private void processPostUpload(Integer id, HttpServletRequest request, HttpServletResponse response,
 			String userType) throws IOException {
-		boolean isAuthenticated = (userType.equals("Investor") ? dao.authenticateInvestor(id)
-				: dao.authenticateIdeaperson(id));
-		List<Register> list = dao.getRegisterData(id);
-		request.getSession().setAttribute("User", list);
 
-		String redirectPage = (userType.equals("Investor") ? "viewinvestorprofile.jsp" : "viewideapersonprofile.jsp");
-		if (isAuthenticated) {
-			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/" + redirectPage);
+		Ideaperson ideaperson = dao.getIdeapersonIfAvailable(id);
+		Register reg = dao.getUserdataById(id);
+		request.getSession().setAttribute("Userdetails", reg);
+		request.getSession().setAttribute("Ideapersondetails", ideaperson);
+
+		if (ideaperson != null) {
+			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/viewideapersonprofile.jsp");
 		} else {
-			response.sendRedirect(
-					request.getContextPath() + "/wp-content/Frontend/" + userType.toLowerCase() + "profile.jsp");
+			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersonprofile.jsp");
 		}
 	}
 
