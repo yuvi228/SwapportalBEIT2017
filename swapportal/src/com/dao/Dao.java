@@ -486,13 +486,37 @@ public class Dao {
 			}
 			e.printStackTrace();
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return inv;
+	}
+
+	public Investor getInvestorById1(Session session, Integer id) {
+		session = sessionfactory.openSession();
+		Transaction tx = null;
+		Investor inv = null;
+		try {
+			tx = session.beginTransaction();
+			Query query = session.createQuery("from Investor where id = :id");
+			query.setParameter("id", id);
+			inv = (Investor) query.uniqueResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return inv;
 	}
 
 	public Ideaperson getPersonById(Integer id) {
-
 		session = sessionfactory.openSession();
 		Transaction tx = null;
 		Ideaperson person = null;
@@ -508,7 +532,32 @@ public class Dao {
 			}
 			e.printStackTrace();
 		} finally {
-			session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return person;
+	}
+
+	public Ideaperson getPersonById(Session session, Integer id) {
+
+		Transaction tx = null;
+		Ideaperson person = null;
+		try {
+			tx = session.beginTransaction();
+			Query query = session.createQuery("from Ideaperson where id = :id");
+			query.setParameter("id", id);
+			person = (Ideaperson) query.uniqueResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return person;
 	}

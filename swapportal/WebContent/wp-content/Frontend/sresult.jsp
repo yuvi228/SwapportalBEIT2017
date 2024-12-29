@@ -130,35 +130,7 @@ if (!regg.isEmpty() && regg != null) {
 					alt="A Social Online Platform for great ideas and Startups">A
 				Social Online Platform for great ideas and Startups
 			</div>
-			<!--                  <div class="navbar-collapse collapse"> -->
-			<!--                     <ul class="nav navbar-nav navbar-right"> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/index.jsp">Home </i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu home li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/investor.jsp">Investor</i></a> --%>
 
-			<!--                         </li> -->
-			<!--                         menu Portfolio li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/ideaperson.jsp">Idea person</i></a> --%>
-
-			<!--                         </li> -->
-			<!--                         menu blog li end here -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/faq.jsp">FAQ</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA" href="<%=request.getContextPath() %>/wp-content/Frontend/feedback.jsp">Feedback</i></a> --%>
-			<!--                         </li> -->
-			<!--                         <li> -->
-			<%--                             <a style="background-color: #8FB8AA;" href="<%=request.getContextPath() %>/wp-content/Frontend/contactus.jsp">Contact US</i></a> --%>
-			<!--                         </li> -->
-			<!--                         menu pages li end here -->
-
-			<!--                            </ul> -->
-			<!--                 </div>/.nav-collapse -->
 
 		</div>
 	</div>
@@ -189,6 +161,7 @@ if (!regg.isEmpty() && regg != null) {
 		Ideaperson regi = null;
 		while (it.hasNext()) {
 			regi = (Ideaperson) it.next();
+			Integer id = regi.getId();
 	%>
 
 	<div class="col-md-9" style="margin: 25px">
@@ -197,8 +170,11 @@ if (!regg.isEmpty() && regg != null) {
 			<div class="col-sm-4 margin30">
 				<div class="image">
 					<div class="content">
-						<img alt="" class="img-responsive"
-							src="<%=request.getContextPath()%>/Image/swlogo.jpg">
+						<img
+							src="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=getallideapersonImage&id=<%=id%>&format=jpg"
+							class="card-img-top" alt="Idea Image"
+							style="object-fit: cover; height: 200px;"
+							onerror="this.onerror=null; this.src='<%=request.getContextPath()%>/Image/default_image_idea.png';" />
 
 					</div>
 					<!--content-->
@@ -208,9 +184,12 @@ if (!regg.isEmpty() && regg != null) {
 			<!--image col-->
 			<div class="col-sm-8">
 				<h3>
-					Name:-<a href=""><%=regi.getProjectabstract()%> </a>
+					Project Abstract:-<a href=""><%=regi.getProjectabstract()%> </a>
 				</h3>
 				<font color="black"> <e.m>Expected Fund:- <%=regi.getExpectfund()%></em></font><br>
+				<font color="black"> <e.m>About Enterprenure:- <%=regi.getAboutyou()%></em></font><br>
+
+
 			</div>
 		</div>
 		<!--property listing row-->

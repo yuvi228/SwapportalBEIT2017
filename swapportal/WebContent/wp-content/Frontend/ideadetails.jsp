@@ -91,8 +91,8 @@
 											<td><%=batchObj.getStatus()%></td>
 											<td><%=batchObj.getStartdate()%></td>
 										
-											<td><a href="<%=request.getContextPath() %>/Controller?actionCode=updateIdea&pid=<%=batchObj.getPid() %>">Edit</a></td>
-											<td><a href="<%=request.getContextPath() %>/Controller?actionCode=deleteIdea&pid=<%=batchObj.getPid() %>">Delete</a></td>
+											<td><a href="<%=request.getContextPath() %>/Ideapostcontroller?actionCode=updateIdea&pid=<%=batchObj.getPid() %>">Edit</a></td>
+											<td><a href="<%=request.getContextPath() %>/Ideapostcontroller?actionCode=deleteIdea&pid=<%=batchObj.getPid() %>">Delete</a></td>
                             </tr>
                             <%
 											}

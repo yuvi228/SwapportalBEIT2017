@@ -184,7 +184,7 @@ label {
 						<span>Idea person profile</span>
 					</h3>
 					<form role="form"
-						action="<%=request.getContextPath()%>/FileUploadDBServlet?ipid=<%=ideaperson.getIpid()%>&id=<%=ideaperson.getId()%>"
+						action="<%=request.getContextPath()%>/Ideapersoncontroller?ipid=<%=ideaperson.getIpid()%>&id=<%=ideaperson.getId()%>"
 						method="post" name="ideaperson" onsubmit="return validate()"
 						enctype="multipart/form-data">
 						<input type="hidden" name="actionCode" value="updateIdeaperson">

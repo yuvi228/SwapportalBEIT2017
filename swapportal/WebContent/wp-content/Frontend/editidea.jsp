@@ -64,7 +64,7 @@
                 <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
                     <div class="login-form">
                         <h3><span>Post Idea</span></h3>
-                         <form role="form" action="<%=request.getContextPath() %>/Controller?pid=<%=post.getPid() %>&id=<%=post.getId() %>" method="post">
+                         <form role="form" action="<%=request.getContextPath() %>/Ideapostcontroller?pid=<%=post.getPid() %>&id=<%=post.getId() %>" method="post">
                          <input type="hidden" name="actionCode" value="updateIdea">
 						<div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Project Definition<font color=red>*</font></label>

@@ -62,7 +62,7 @@
                 <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
                     <div class="login-form">
                         <h3><span>Compose</span></h3>
-                            <form role="form" class="form-horizontal" action="<%=request.getContextPath() %>/Controller" method="post">
+                            <form role="form" class="form-horizontal" action="<%=request.getContextPath() %>/Authcontroller" method="post">
                             <input type="hidden" name="actionCode" value="emailCompose">
                             
                             <div class="form-group">

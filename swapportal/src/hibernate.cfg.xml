@@ -11,7 +11,7 @@
 		<!-- Database connection settings localhost -->
 		<property name="connection.url">jdbc:mysql://localhost:3306/project</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password"></property>
+		<property name="connection.password">MxF#7qH4rU8jBv&amp;Kz</property>
 
 		<!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property> -->
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>

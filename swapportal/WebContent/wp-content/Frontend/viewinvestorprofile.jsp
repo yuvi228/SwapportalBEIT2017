@@ -95,7 +95,7 @@ boolean hasInvestor = (inv != null && !inv.isEmpty());
 	<div class="col-sm-3 margin40">
 		<ul class="list-unstyled side-nav">
 			<li><a
-				href="<%=request.getContextPath()%>/Controller?actionCode=editinvestor&id=<%=hasUser ? reg.get(0).getId() : ""%>"><i
+				href="<%=request.getContextPath()%>/Investorcontroller?actionCode=editinvestor&id=<%=hasUser ? reg.get(0).getId() : ""%>"><i
 					class="fa fa-cogs"></i> Edit Profile</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp"><i
@@ -118,8 +118,9 @@ boolean hasInvestor = (inv != null && !inv.isEmpty());
 						Integer id = regi.getId();
 					%>
 					<img
-						src="<%=request.getContextPath()%>/wp-content/Frontend/getImage.jsp?id=<%=id%>"
+						src="<%=request.getContextPath()%>/Investorcontroller?actionCode=getallinvestorImage&id=<%=id%>&format=jpg"
 						style="width: 150px; height: 150px; margin: 0px auto;">
+
 					<div class="profile-data-name">
 						<h3><%=regi.getName()%></h3>
 					</div>

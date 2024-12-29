@@ -170,7 +170,8 @@ label {
 						<span>Search Proposals</span>
 					</h3>
 					<form role="form" class="form-horizontal"
-						action="<%=request.getContextPath()%>/Controller" method="post">
+						action="<%=request.getContextPath()%>/Ideapersoncontroller"
+						method="post">
 						<input type="hidden" name="actionCode" value="search">
 
 

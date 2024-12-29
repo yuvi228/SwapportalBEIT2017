@@ -13,7 +13,7 @@
 		</id>
 		<property name="id" column="id"></property>
 		<property name="type" column="type"></property>
-		<property name="photo" column="photo"></property>
+		<property name="photo" column="photo" type="binary"></property>
 		<property name="aboutyou" column="aboutyou"></property>
 		<property name="expectfund" column="expectfund"></property>
 		<property name="projectabstract" column="projectabstract"></property>

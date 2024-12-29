@@ -145,18 +145,18 @@
 			<!-- 					class="fa fa-dashboard"></i> Dashboard</a></li> -->
 
 			<li><a
-				href="<%=request.getContextPath()%>/Controller?actionCode=ideapersonprofile&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=ideapersonprofile&id=<%=regi.getId()%>"><i
 					class="fa fa-cogs"></i>Profile</a></li>
 
 			<li><a
-				href="<%=request.getContextPath()%>/Controller?actionCode=uploadidea&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=uploadidea&id=<%=regi.getId()%>"><i
 					class="fa fa-upload"></i>Upload New Idea</a></li>
 
 			<li><a
-				href="<%=request.getContextPath()%>/Controller?actionCode=viewIdea&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=viewIdea&id=<%=regi.getId()%>"><i
 					class="fa fa-history"></i> Idea Repository</a></li>
 			<li><a
-				href="<%=request.getContextPath()%>/Controller?actionCode=getfeedback&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Feedbackcontroller?actionCode=getfeedback&id=<%=regi.getId()%>"><i
 					class="fa fa-dashboard"></i> Feedback</a></li>
 
 			<%
@@ -184,7 +184,7 @@
 					Integer id = inv.getId();
 					%>
 					<img
-						src="<%=request.getContextPath()%>/wp-content/Frontend/getallinvestorImage.jsp?id=<%=id%>"
+						src="<%=request.getContextPath()%>/Investorcontroller?actionCode=getallinvestorImage&id=<%=id%>&format=jpg"
 						class="img-fluid rounded-circle" alt="Investor Image"
 						style="width: 150px; height: 150px;"
 						onerror="this.onerror=null; this.src='<%=request.getContextPath()%>/Image/default_image_investor.jpeg';" />

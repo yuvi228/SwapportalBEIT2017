@@ -88,8 +88,8 @@
 										<td><%=regi.getUsername() %></td>
 										<td><%=regi.getPassword() %></td>
 										
-										<td><a href="<%=request.getContextPath() %>/Controller?actionCode=updateuserData&id=<%=regi.getId() %>">Update</a></td>
-										<td><a href="<%=request.getContextPath() %>/Controller?actionCode=deleteData&id=<%=regi.getId() %>">Delete</a></td>
+										<td><a href="<%=request.getContextPath() %>/Authcontroller?actionCode=updateuserData&id=<%=regi.getId() %>">Update</a></td>
+										<td><a href="<%=request.getContextPath() %>/Authcontroller?actionCode=deleteData&id=<%=regi.getId() %>">Delete</a></td>
 									
 						
 						</tr>

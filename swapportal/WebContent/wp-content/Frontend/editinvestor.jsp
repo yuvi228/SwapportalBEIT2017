@@ -180,7 +180,7 @@ label {
 
 
 					<form role="form"
-						action="<%=request.getContextPath()%>/FileUploadDBServlet?iid=<%=inve.getIid()%>&id=<%=inve.getId()%>"
+						action="<%=request.getContextPath()%>/Investorcontroller?iid=<%=inve.getIid()%>&id=<%=inve.getId()%>"
 						method="post" name="investor" onsubmit="return validate()"
 						enctype="multipart/form-data">
 						<input type="hidden" name="actionCode" value="updateInvestor">

@@ -11,22 +11,49 @@
 	</welcome-file-list>
 
 	<servlet>
-		<servlet-name>Controller</servlet-name>
-		<servlet-class>com.controller.Controller</servlet-class>
+		<servlet-name>Authcontroller</servlet-name>
+		<servlet-class>com.controller.Authcontroller</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>Controller</servlet-name>
-		<url-pattern>/Controller</url-pattern>
+		<servlet-name>Authcontroller</servlet-name>
+		<url-pattern>/Authcontroller</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>FileUploadDBServlet</servlet-name>
-		<servlet-class>comm.FileUploadDBServlet</servlet-class>
+		<servlet-name>Investorcontroller</servlet-name>
+		<servlet-class>com.controller.Investorcontroller</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>FileUploadDBServlet</servlet-name>
-		<url-pattern>/FileUploadDBServlet</url-pattern>
+		<servlet-name>Investorcontroller</servlet-name>
+		<url-pattern>/Investorcontroller</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Ideapersoncontroller</servlet-name>
+		<servlet-class>com.controller.Ideapersoncontroller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Ideapersoncontroller</servlet-name>
+		<url-pattern>/Ideapersoncontroller</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Ideapostcontroller</servlet-name>
+		<servlet-class>com.controller.Ideapostcontroller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Ideapostcontroller</servlet-name>
+		<url-pattern>/Ideapostcontroller</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Feedbackcontroller</servlet-name>
+		<servlet-class>com.controller.Feedbackcontroller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Feedbackcontroller</servlet-name>
+		<url-pattern>/Feedbackcontroller</url-pattern>
 	</servlet-mapping>
 
 	<context-param>

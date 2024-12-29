@@ -79,7 +79,7 @@
 											<td><%=batchObj.getId()%></td>
 											<td><%=batchObj.getName()%></td>
 											<td><%=batchObj.getComments()%></td>
-											<td><a href="<%=request.getContextPath() %>/Controller?actionCode=replyfeedback&id=<%=batchObj.getId() %>">Reply</a></td>
+											<td><a href="<%=request.getContextPath() %>/Feedbackcontroller?actionCode=replyfeedback&id=<%=batchObj.getId() %>">Reply</a></td>
 										
 											 </tr>
                             <%

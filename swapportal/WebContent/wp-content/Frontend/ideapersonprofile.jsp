@@ -185,7 +185,7 @@ label {
 					</h3>
 
 					<form role="form"
-						action="<%=request.getContextPath()%>/FileUploadDBServlet?id=<%=regg.getId()%>"
+						action="<%=request.getContextPath()%>/Ideapersoncontroller?id=<%=regg.getId()%>"
 						method="post" name="ideaperson" onsubmit="return validate()"
 						enctype="multipart/form-data">
 						<input type="hidden" name="actionCode" value="addIdeaperson">

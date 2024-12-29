@@ -2,22 +2,38 @@ package com.model;
 
 import java.io.InputStream;
 
-import java.sql.Blob;
-
 public class Investor {
 
 	public Investor() {
 
 	}
 
-	public Investor(Integer id, String type, String areaofinterest, String investingamount, byte[] logo,
-			String address1, String address2, String street, String city, String country, String map, String fb,
-			String tw, String gg) {
+	public Investor(Integer id, String type, String areaofinterest, String investingamount, String address1,
+			String address2, String street, String city, String country, String map, String fb, String tw, String gg) {
 		this.id = id;
 		this.type = type;
 		this.areaofinterest = areaofinterest;
 		this.investingamount = investingamount;
-		this.logo = logo;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.street = street;
+		this.city = city;
+		this.country = country;
+		this.map = map;
+		this.fb = fb;
+		this.tw = tw;
+		this.gg = gg;
+
+	}
+
+	public Investor(Integer iid, Integer id, String type, String areaofinterest, String investingamount,
+			String address1, String address2, String street, String city, String country, String map, String fb,
+			String tw, String gg) {
+		this.iid = iid;
+		this.id = id;
+		this.type = type;
+		this.areaofinterest = areaofinterest;
+		this.investingamount = investingamount;
 		this.address1 = address1;
 		this.address2 = address2;
 		this.street = street;
@@ -45,15 +61,7 @@ public class Investor {
 
 	private String areaofinterest;
 	private String investingamount;
-	// private Blob logo;
-	//
-	// public Blob getLogo() {
-	// return logo;
-	// }
-	//
-	// public void setLogo(Blob logo) {
-	// this.logo = logo;
-	// }
+
 	private byte[] logo;
 
 	public byte[] getlogo() {

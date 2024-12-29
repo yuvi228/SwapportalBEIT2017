@@ -45,7 +45,7 @@
 				<!-- Registration Form Section -->
 				<div class="col-md-6">
 					<div class="sky-form-login">
-						<form action="<%=request.getContextPath()%>/Controller"
+						<form action="<%=request.getContextPath()%>/Authcontroller"
 							class="sky-form" method="post" onsubmit="return validate()"
 							name="reg">
 							<input type="hidden" name="actionCode" value="addRegister">

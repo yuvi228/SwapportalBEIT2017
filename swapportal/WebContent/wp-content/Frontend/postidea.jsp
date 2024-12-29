@@ -160,7 +160,7 @@ label {
 						<span>Post Idea</span>
 					</h3>
 					<form role="form"
-						action="<%=request.getContextPath()%>/Controller?id=<%=regi.getId()%>"
+						action="<%=request.getContextPath()%>/Ideapostcontroller?id=<%=regi.getId()%>"
 						method="post">
 						<input type="hidden" name="actionCode" value="addIdea">
 

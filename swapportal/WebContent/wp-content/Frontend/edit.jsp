@@ -60,7 +60,7 @@
                     <div class="registration-title"><strong>Edit Information</strong>, use form below</div>
                     <div class="registration-subtitle"> </div>
                   
-                    <form action="<%=request.getContextPath() %>/Controller?id=<%=reg.getId() %>" class="form-horizontal" method="post">
+                    <form action="<%=request.getContextPath() %>/Authcontroller?id=<%=reg.getId() %>" class="form-horizontal" method="post">
                      <input type="hidden" name="actionCode" value="updateData">   
                     <h4>Personal info</h4>
 

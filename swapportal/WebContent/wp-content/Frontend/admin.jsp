@@ -41,23 +41,23 @@
 					href="<%=request.getContextPath()%>/wp-content/Frontend/registration.jsp"><i
 						class="fa fa-user-plus fa-5x"></i><br>Add User</a></td>
 				<td><a
-					href="<%=request.getContextPath()%>/Controller?actionCode=getalluser"><i
+					href="<%=request.getContextPath()%>/Authcontroller?actionCode=getalluser"><i
 						class="fa fa-pencil fa-5x"></i><br>Manage User</a></td>
 			</tr>
 			<tr>
 				<td><a
-					href="<%=request.getContextPath()%>/Controller?actionCode=getallIdeaperson"><i
+					href="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=getallIdeaperson"><i
 						class="fa fa-dashboard fa-5x"></i><br>Idea Person Profiles</a></td>
 				<td><a
-					href="<%=request.getContextPath()%>/Controller?actionCode=getallIdea"><i
+					href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=getallIdea"><i
 						class="fa fa-cogs fa-5x"></i><br>Manage Ideas</a></td>
 			</tr>
 			<tr>
 				<td><a
-					href="<%=request.getContextPath()%>/Controller?actionCode=getallInvestor"><i
+					href="<%=request.getContextPath()%>/Investorcontroller?actionCode=getallInvestor"><i
 						class="fa fa-users fa-5x"></i><br>Investor Profiles</a></td>
 				<td><a
-					href="<%=request.getContextPath()%>/Controller?actionCode=getallfeedback"><i
+					href="<%=request.getContextPath()%>/Feedbackcontroller?actionCode=getallfeedback"><i
 						class="fa fa-comments fa-5x"></i><br>Feedback Management</a></td>
 				<td><a
 					href="<%=request.getContextPath()%>/wp-content/Frontend/emailcompose.jsp"><i

@@ -1,3 +1,4 @@
+<%@page import="java.util.Base64"%>
 <%@page import="com.model.Ideaperson"%>
 <%@page import="com.model.Register"%>
 <%@page import="java.util.Iterator"%>
@@ -6,7 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	List<Ideaperson> post = (List<Ideaperson>) session.getAttribute("Ideaperson");
+	List<Ideaperson> ideaperson = (List<Ideaperson>) session.getAttribute("Ideaperson");
 %>
 
 <%
@@ -165,7 +166,7 @@ body {
 	<div class="col-sm-3">
 		<ul class="list-unstyled side-nav">
 			<li><a
-				href="<%=request.getContextPath()%>/Controller?actionCode=investorprofile&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Investorcontroller?actionCode=investorprofile&id=<%=regi.getId()%>"><i
 					class="fa fa-cogs"></i> Profile</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp"><i
@@ -174,7 +175,7 @@ body {
 				href="<%=request.getContextPath()%>/wp-content/Frontend/searchproposal.jsp"><i
 					class="fa fa-search"></i> Search Proposal</a></li>
 			<li><a
-				href="<%=request.getContextPath()%>/Controller?actionCode=getfeedback&id=<%=regi.getId()%>"><i
+				href="<%=request.getContextPath()%>/Feedbackcontroller?actionCode=getfeedback&id=<%=regi.getId()%>"><i
 					class="fa fa-search"></i> Feedback</a></li>
 		</ul>
 	</div>
@@ -185,8 +186,8 @@ body {
 		<h3 class="title-section">Idea Proposals</h3>
 		<div class="row">
 			<%
-			if (post != null && !post.isEmpty()) {
-				Iterator<Ideaperson> it = post.iterator();
+			if (ideaperson != null && !ideaperson.isEmpty()) {
+				Iterator<Ideaperson> it = ideaperson.iterator();
 				Ideaperson pos = null;
 				while (it.hasNext()) {
 					pos = (Ideaperson) it.next();
@@ -199,7 +200,7 @@ body {
 			<div class="col-sm-4 mb-4">
 				<div class="card h-100">
 					<img
-						src="<%=request.getContextPath()%>/wp-content/Frontend/getallideapersonImage.jsp?id=<%=id%>"
+						src="<%=request.getContextPath()%>/Ideapersoncontroller?actionCode=getallideapersonImage&id=<%=id%>&format=jpg"
 						class="card-img-top" alt="Idea Image"
 						style="object-fit: cover; height: 200px;"
 						onerror="this.onerror=null; this.src='<%=request.getContextPath()%>/Image/default_image_idea.png';" />

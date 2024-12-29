@@ -80,7 +80,7 @@
 						<span>Forgot Password</span>
 					</h3>
 					<form role="form"
-						action="<%=request.getContextPath()%>/Controller" method="post"
+						action="<%=request.getContextPath()%>/Authcontroller" method="post"
 						name="ideaperson" onsubmit="return validate()">
 						<input type="hidden" name="actionCode" value="addForgot">
 
