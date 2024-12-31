@@ -19,14 +19,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import org.hibernate.Transaction;
-import com.dao.Dao;
+
+import com.dao.Authdao;
+import com.dao.Ideapersondao;
 import com.model.Ideaperson;
 import com.model.Register;
 import com.util.Util;
 
 @MultipartConfig(maxFileSize = 16177215) // upload file's size up to 16MB
 public class Ideapersoncontroller extends HttpServlet {
-	Dao dao = new Dao();
+	Ideapersondao dao = new Ideapersondao();
+	Authdao authdao = new Authdao();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +50,7 @@ public class Ideapersoncontroller extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("id"));
 			Ideaperson ideaperson = dao.getIdeaPersonById(id);
 			request.getSession(false).setAttribute("Ideapersondetails", ideaperson);
-			Register register = dao.getUserdataById(id);
+			Register register = authdao.getUserdataById(id);
 			request.getSession(false).setAttribute("Userdetails", register);
 			response.sendRedirect(basePath + "editideaperson.jsp");
 		}
@@ -65,7 +68,7 @@ public class Ideapersoncontroller extends HttpServlet {
 			Ideaperson ideaperson = dao.getIdeapersonIfAvailable(id);
 			request.getSession(false).setAttribute("Ideapersondetails", ideaperson);
 
-			Register register = dao.getUserdataById(id);
+			Register register = authdao.getUserdataById(id);
 			request.getSession(false).setAttribute("Userdetails", register);
 
 			if (ideaperson != null) {
@@ -78,7 +81,7 @@ public class Ideapersoncontroller extends HttpServlet {
 		if (actioncode.equals("uploadidea")) {
 			id = Integer.parseInt(request.getParameter("id"));
 
-			Register register = dao.getUserdataById(id);
+			Register register = authdao.getUserdataById(id);
 			request.getSession(false).setAttribute("Userdetails", register);
 
 			Ideaperson person = dao.getIdeaPersonById(id);
@@ -253,7 +256,7 @@ public class Ideapersoncontroller extends HttpServlet {
 			String userType) throws IOException {
 
 		Ideaperson ideaperson = dao.getIdeapersonIfAvailable(id);
-		Register reg = dao.getUserdataById(id);
+		Register reg = authdao.getUserdataById(id);
 		request.getSession().setAttribute("Userdetails", reg);
 		request.getSession().setAttribute("Ideapersondetails", ideaperson);
 

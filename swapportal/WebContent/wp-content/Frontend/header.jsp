@@ -1,3 +1,5 @@
+<%@ page import="com.util.Filepath"%>
+
 <div class="navbar navbar-default navbar-static-top yamm sticky"
 	role="navigation">
 	<div class="container">
@@ -16,6 +18,7 @@
 			</a> <span class="navbar-tagline">Bridging Ideas with Investment,
 				Empowering Innovators.</span>
 		</div>
+
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a
@@ -35,8 +38,10 @@
 		</div>
 	</div>
 </div>
+
 <head>
 <style>
+/* Navbar Styles */
 .navbar {
 	background: linear-gradient(to right, #8FB8AA, #57A773);
 	border: none;
@@ -46,19 +51,19 @@
 .navbar-logo {
 	width: 150px;
 	margin: 0 10px;
-	display: inline-block;
 	vertical-align: middle;
 }
 
 .navbar-tagline {
 	font-size: 16px;
-	color: #ffffff;
-	display: inline-block;
+	color: #fff;
 	margin-left: 15px;
+	display: inline-block;
 }
 
+/* Navbar Links */
 .navbar-nav li a {
-	color: #ffffff !important;
+	color: #fff !important;
 	padding: 10px 15px;
 	transition: background 0.3s ease, color 0.3s ease;
 	border-radius: 5px;
@@ -67,18 +72,19 @@
 
 .navbar-nav li a:hover {
 	background-color: #57A773 !important;
-	color: #fff !important;
 }
 
+/* Toggle Button */
 .navbar-toggle {
 	border: none;
 	background-color: #57A773;
 }
 
 .navbar-toggle .icon-bar {
-	background-color: #ffffff;
+	background-color: #fff;
 }
 
+/* Responsive Styles */
 @media ( max-width : 768px) {
 	.navbar-tagline {
 		display: block;

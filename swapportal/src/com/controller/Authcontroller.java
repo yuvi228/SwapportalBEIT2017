@@ -11,15 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dao.Dao;
+import com.dao.Authdao;
+import com.dao.Ideapersondao;
+import com.dao.Investordao;
 import com.model.Ideaperson;
 import com.model.Investor;
 import com.model.Register;
 import com.util.Util;
 
 public class Authcontroller extends HttpServlet {
-	Dao dao = new Dao();
-	// RequestDispatcher dispatcher;
+	Authdao dao = new Authdao();
+	Investordao investordao = new Investordao();
+	Ideapersondao ideapersondao = new Ideapersondao();
 
 	// SEND EMAIL START
 	private String host;
@@ -140,11 +143,11 @@ public class Authcontroller extends HttpServlet {
 
 				String userType = reg.getType();
 				if (userType.equals("Investor") && userType != null) {
-					List<Ideaperson> ideapersonList = dao.doloadIdeaperson();
+					List<Ideaperson> ideapersonList = ideapersondao.doloadIdeaperson();
 					request.getSession(false).setAttribute("Ideapersonlist", ideapersonList);
 					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investordashboard.jsp");
 				} else {
-					List<Investor> investorList = dao.doloadInvestor();
+					List<Investor> investorList = investordao.doloadInvestor();
 					request.getSession(false).setAttribute("Investorlist", investorList);
 					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersondashboard.jsp");
 				}

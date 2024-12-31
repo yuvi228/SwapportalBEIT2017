@@ -68,6 +68,37 @@ if (!reg.isEmpty() && reg != null) {
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<link rel="icon" href="<%=request.getContextPath()%>/favicon.ico"
+	type="image/x-icon">
+<link
+	href="<%=request.getContextPath()%>/css/bootstrap/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/css/fontawesome/font-awesome.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/css/fontawesome/font-awesome.min.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/flexslider.css"
+	rel="stylesheet" type="text/css" media="screen">
+<link href="<%=request.getContextPath()%>/css/animate.css"
+	rel="stylesheet" type="text/css" media="screen">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/settings.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/rev-style.css">
+<link href="<%=request.getContextPath()%>/css/owl.carousel.css"
+	rel="stylesheet" type="text/css" media="screen">
+<link href="<%=request.getContextPath()%>/css/owl.theme.css"
+	rel="stylesheet" type="text/css" media="screen">
+<link href="<%=request.getContextPath()%>/css/yamm.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="<%=request.getContextPath()%>/cubeportfolio/css/cubeportfolio.min.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/style.css"
+	rel="stylesheet" type="text/css" media="screen">
+
 <!-- END META SECTION -->
 <style>
 label {
@@ -167,27 +198,16 @@ label {
 		</div>
 	</div>
 
+	<div class="col-sm-3 margin40">
+		<ul class="list-unstyled side-nav">
 
+			<li><a
+				href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp"><i
+					class="fa fa-dashboard"></i> Dashboard</a></li>
 
-	<div class="breadcrumb-wrap">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					<h4>Search Proposal</h4>
-				</div>
-				<div class="col-sm-6 hidden-xs text-right">
-					<ol class="breadcrumb">
-						<li><a
-							href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp">Dashboard</a></li>
-						<li><a
-							href="<%=request.getContextPath()%>/wp-content/Frontend/searchproposal.jsp">Search
-								Proposals</a></li>
-					</ol>
-				</div>
-			</div>
-		</div>
+		</ul>
 	</div>
-	<!--breadcrumbs-->
+
 	<div class="divide80"></div>
 	<div class="container my-5">
 		<div class="row justify-content-center">
@@ -238,32 +258,38 @@ label {
 	<!-- END CONTENT FRAME -->
 	<!-- START SCRIPTS -->
 	<!-- START PLUGINS -->
-	<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
 	<script type="text/javascript"
-		src="js/plugins/bootstrap/bootstrap.min.js"></script>
+		src="<%=request.getContextPath()%>/js/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/plugins/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/plugins/bootstrap/bootstrap.min.js"></script>
 	<!-- END PLUGINS -->
 
 	<!-- START THIS PAGE PLUGINS-->
-	<script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+	<script type='text/javascript'
+		src='<%=request.getContextPath()%>/js/plugins/icheck/icheck.min.js'></script>
 	<script type="text/javascript"
-		src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+		src="<%=request.getContextPath()%>/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 
 	<script type="text/javascript"
-		src="js/plugins/summernote/summernote.js"></script>
+		src="<%=request.getContextPath()%>/js/plugins/summernote/summernote.js"></script>
 	<script type="text/javascript"
-		src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+		src="<%=request.getContextPath()%>/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
 	<script type="text/javascript"
-		src="js/plugins/bootstrap/bootstrap-select.js"></script>
+		src="<%=request.getContextPath()%>/js/plugins/bootstrap/bootstrap-select.js"></script>
 	<script type="text/javascript"
-		src="js/plugins/bootstrap/bootstrap-file-input.js"></script>
+		src="<%=request.getContextPath()%>/js/plugins/bootstrap/bootstrap-file-input.js"></script>
 	<!-- END THIS PAGE PLUGINS-->
 
 	<!-- START TEMPLATE -->
-	<script type="text/javascript" src="js/settings.js"></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/settings.js"></script>
 
-	<script type="text/javascript" src="js/plugins.js"></script>
-	<script type="text/javascript" src="js/actions.js"></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/plugins.js"></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/actions.js"></script>
 
 
 

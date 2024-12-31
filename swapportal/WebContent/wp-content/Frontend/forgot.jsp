@@ -35,8 +35,8 @@
 <link href="<%=request.getContextPath()%>/css/owl.theme.css"
 	rel="stylesheet" type="text/css" media="screen">
 <!--mega menu -->
-<link href="<%=request.getContextPath()%>/css/yamm.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/yamm.css" rel="stylesheet"
+	type="text/css">
 <!--cube css-->
 <link
 	href="<%=request.getContextPath()%>/cubeportfolio/css/cubeportfolio.min.css"
@@ -80,8 +80,8 @@
 						<span>Forgot Password</span>
 					</h3>
 					<form role="form"
-						action="<%=request.getContextPath()%>/Authcontroller" method="post"
-						name="ideaperson" onsubmit="return validate()">
+						action="<%=request.getContextPath()%>/Authcontroller"
+						method="post" name="ideaperson" onsubmit="return validate()">
 						<input type="hidden" name="actionCode" value="addForgot">
 
 						<div class="form-group">

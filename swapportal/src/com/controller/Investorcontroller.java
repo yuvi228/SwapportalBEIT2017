@@ -17,15 +17,17 @@ import javax.servlet.http.Part;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import com.dao.Dao;
 
+import com.dao.Authdao;
+import com.dao.Investordao;
 import com.model.Investor;
 import com.model.Register;
 import com.util.Util;
 
 @MultipartConfig(maxFileSize = 16177215) // upload file's size up to 16MB
 public class Investorcontroller extends HttpServlet {
-	Dao dao = new Dao();
+	Investordao dao = new Investordao();
+	Authdao authdao = new Authdao();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,7 +44,7 @@ public class Investorcontroller extends HttpServlet {
 		if (actioncode.equals("editinvestor")) {
 
 			id = Integer.parseInt(request.getParameter("id"));
-			Register reg = dao.getUserdataById(id);
+			Register reg = authdao.getUserdataById(id);
 			Investor investor = dao.getInvestorById1(id);
 			request.getSession(false).setAttribute("Investordata", investor);
 			request.getSession(false).setAttribute("Userdata", reg);
@@ -57,7 +59,7 @@ public class Investorcontroller extends HttpServlet {
 		if (actioncode.equals("investorprofile")) {
 			id = Integer.parseInt(request.getParameter("id"));
 			Investor investor = dao.getInvestorProfileIfAvailable(id);
-			Register userData = dao.getUserdataById(id);
+			Register userData = authdao.getUserdataById(id);
 			request.getSession(false).setAttribute("Userdata", userData);
 
 			if (investor != null) {
@@ -238,7 +240,7 @@ public class Investorcontroller extends HttpServlet {
 		Investor investor = dao.getInvestorProfileIfAvailable(id);
 		request.getSession().setAttribute("Investordata", investor);
 
-		Register reg = dao.getUserdataById(id);
+		Register reg = authdao.getUserdataById(id);
 		request.getSession().setAttribute("Userdata", reg);
 
 		if (investor != null) {

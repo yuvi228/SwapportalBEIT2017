@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dao.Dao;
+import com.dao.Authdao;
+import com.dao.Feedbackdao;
 import com.model.Feedback;
 import com.model.Register;
 import com.util.Util;
 
 public class Feedbackcontroller extends HttpServlet {
-	Dao dao = new Dao();
-	// RequestDispatcher dispatcher;
+	Feedbackdao dao = new Feedbackdao();
+	Authdao authdao = new Authdao();
 
 	// SEND EMAIL START
 	private String host;
@@ -56,7 +57,7 @@ public class Feedbackcontroller extends HttpServlet {
 
 		if (actioncode.equals("getfeedback")) {
 			id = Integer.parseInt(request.getParameter("id"));
-			List<Register> lista = dao.getRegisterData(id);
+			List<Register> lista = authdao.getRegisterData(id);
 			request.getSession(false).setAttribute("User", lista);
 			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/feedback.jsp");
 
@@ -68,7 +69,7 @@ public class Feedbackcontroller extends HttpServlet {
 			System.out.println("Email sent start");
 			id = Integer.parseInt(request.getParameter("id"));
 			System.out.println(id);
-			Register replyfeedback = dao.getUserdataById(id);
+			Register replyfeedback = authdao.getUserdataById(id);
 			System.out.println(replyfeedback.getEmail());
 			String email = replyfeedback.getEmail();
 			String resultMessage = "";
@@ -129,7 +130,7 @@ public class Feedbackcontroller extends HttpServlet {
 
 			Integer fid = Integer.valueOf(0);
 			fid = dao.doaddFeedback(feedback);
-			Register istype = dao.getUserdataById(id);
+			Register istype = authdao.getUserdataById(id);
 
 			if (fid.intValue() > 0) {
 

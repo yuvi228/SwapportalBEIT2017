@@ -96,9 +96,7 @@ Register reg = (Register) session.getAttribute("Userdata");
 			<li><a
 				href="<%=request.getContextPath()%>/wp-content/Frontend/investordashboard.jsp"><i
 					class="fa fa-dashboard"></i> Dashboard</a></li>
-			<li><a
-				href="<%=request.getContextPath()%>/wp-content/Frontend/searchproposal.jsp"><i
-					class="fa fa-search"></i> Search Proposal</a></li>
+
 		</ul>
 	</div>
 

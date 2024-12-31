@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.dao.Dao;
+
+import com.dao.Authdao;
+import com.dao.Ideapostdao;
 import com.model.Post;
 import com.model.Register;
 
 public class Ideapostcontroller extends HttpServlet {
-	Dao dao = new Dao();
+	Ideapostdao dao = new Ideapostdao();
+	Authdao authdao = new Authdao();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,7 +45,7 @@ public class Ideapostcontroller extends HttpServlet {
 
 		if (actioncode.equals("ListOfIdeasForCurrentUser")) {
 			id = Integer.parseInt(request.getParameter("id"));
-			Register lista = dao.getUserdataById(id);
+			Register lista = authdao.getUserdataById(id);
 			request.getSession(false).setAttribute("Userdetails", lista);
 			List<Post> postbyIdeaperson = dao.getListOfIdeaPostsByUserId(id);
 			request.getSession(false).setAttribute("PostsbyIdeaperson", postbyIdeaperson);
@@ -92,7 +95,7 @@ public class Ideapostcontroller extends HttpServlet {
 
 				if (pid.intValue() > 0) {
 
-					Register register = dao.getUserdataById(id);
+					Register register = authdao.getUserdataById(id);
 					request.getSession(false).setAttribute("Userdetails", register);
 
 					List<Post> postdetails = dao.getListOfIdeaPostsByUserId(id);
