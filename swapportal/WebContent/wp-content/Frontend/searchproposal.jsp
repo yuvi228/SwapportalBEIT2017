@@ -4,16 +4,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%
-List<Register> reg = (List<Register>) session.getAttribute("User");
-%>
-<%
-if (!reg.isEmpty() && reg != null) {
-	Iterator<Register> itr = reg.iterator();
-	Register regi = null;
-	while (itr.hasNext()) {
-		regi = (Register) itr.next();
-%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,51 +12,9 @@ if (!reg.isEmpty() && reg != null) {
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Search Proposals</title>
 <link
-	href="<%=request.getContextPath()%>/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet">
-<!-- font awesome for icons -->
-<link
-	href="<%=request.getContextPath()%>/css/fontawesome/font-awesome.css"
-	rel="stylesheet">
-<link
-	href="<%=request.getContextPath()%>/css/fontawesome/font-awesome.min.css"
-	rel="stylesheet">
-<!-- flex slider css -->
-<link href="<%=request.getContextPath()%>/css/flexslider.css"
-	rel="stylesheet" type="text/css" media="screen">
-<!-- animated css  -->
-<link href="<%=request.getContextPath()%>/css/animate.css"
-	rel="stylesheet" type="text/css" media="screen">
-<!-- Revolution Style-sheet -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/settings.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/rev-style.css">
-<!--owl carousel css-->
-<link href="<%=request.getContextPath()%>/css/owl.carousel.css"
-	rel="stylesheet" type="text/css" media="screen">
-<link href="<%=request.getContextPath()%>/css/owl.theme.css"
-	rel="stylesheet" type="text/css" media="screen">
-<!--mega menu -->
-<link href="<%=request.getContextPath()%>/css/yamm.css" rel="stylesheet"
-	type="text/css">
-<!--cube css-->
-<link href="<%=request.getContextPath()%>/css/cubeportfolio.min.css"
-	rel="stylesheet" type="text/css">
-<!-- custom css-->
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css" media="screen">
-
-<link rel="icon" href="<%=request.getContextPath()%>/favicon.ico"
-	type="image/x-icon" />
-
-<link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<script src="https://kit.fontawesome.com/a076d05399.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <link rel="icon" href="<%=request.getContextPath()%>/favicon.ico"
 	type="image/x-icon">
@@ -98,12 +46,9 @@ if (!reg.isEmpty() && reg != null) {
 	rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/css/style.css"
 	rel="stylesheet" type="text/css" media="screen">
-
-<!-- END META SECTION -->
 <style>
 label {
 	color: black !important;
-	/* Ensures that all labels in the form are black */
 }
 
 .card {
@@ -128,75 +73,7 @@ label {
 <body background="<%=request.getContextPath()%>/Image/bg.jpg"
 	style="background-attachment: fixed;">
 
-	<div class="top-bar-dark">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 hidden-xs">
-					<div class="top-bar-socials">
-						<a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-facebook">
-							<i class="fa fa-facebook"></i> <i class="fa fa-facebook"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-twitter">
-							<i class="fa fa-twitter"></i> <i class="fa fa-twitter"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-google-plus">
-							<i class="fa fa-google-plus"></i> <i class="fa fa-google-plus"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-linkedin">
-							<i class="fa fa-linkedin"></i> <i class="fa fa-linkedin"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-google-plus">
-							<i class="fa fa-youtube"></i> <i class="fa fa-youtube"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-dribbble">
-							<i class="fa fa-dribbble"></i> <i class="fa fa-dribbble"></i>
-						</a>
-					</div>
-				</div>
-				<div class="col-sm-8 text-right">
-					<ul class="list-inline top-dark-right">
-
-						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regi.getUsername()%></a></li>
-						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
-						<%
-						}
-						}
-						%>
-						<li><a class="topbar-icons" href="#"><span><i
-									class="fa fa-search top-search"></i></span></a></li>
-					</ul>
-					<div class="search">
-						<form role="form">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Write something and press enter"> <span
-								class="search-close"><i class="fa fa-times"></i></span>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--top-bar-dark end here-->
-	<div class="navbar navbar-default navbar-static-top yamm sticky"
-		role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<img src="<%=request.getContextPath()%>/Image/swlogo.jpg"
-					style="width: 150px; margin: 0px auto;"
-					alt="A Social Online Platform for great ideas and Startups">A
-				Social Online Platform for great ideas and Startups
-			</div>
-
-
-		</div>
-	</div>
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<div class="col-sm-3 margin40">
 		<ul class="list-unstyled side-nav">
@@ -254,10 +131,8 @@ label {
 
 
 	<br />
-	<jsp:include page="footer.jsp"></jsp:include>
-	<!-- END CONTENT FRAME -->
-	<!-- START SCRIPTS -->
-	<!-- START PLUGINS -->
+
+
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript"
@@ -290,8 +165,10 @@ label {
 		src="<%=request.getContextPath()%>/js/plugins.js"></script>
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/actions.js"></script>
-
-
+	<script src="https://kit.fontawesome.com/a076d05399.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

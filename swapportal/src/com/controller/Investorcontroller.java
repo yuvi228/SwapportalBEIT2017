@@ -35,7 +35,7 @@ public class Investorcontroller extends HttpServlet {
 		Integer id = null;
 		String actioncode = request.getParameter("actionCode");
 
-		HttpSession httpsession = request.getSession();
+		HttpSession session = request.getSession(false);
 
 		final String basePath = request.getContextPath() + "/wp-content/Frontend/";
 
@@ -53,7 +53,7 @@ public class Investorcontroller extends HttpServlet {
 		if (actioncode.equals("getallInvestor")) {
 
 			List<Investor> allinvestor = dao.doloadInvestor();
-			httpsession.setAttribute("Investor", allinvestor);
+			session.setAttribute("Investor", allinvestor);
 			response.sendRedirect(basePath + "investorprofiledetails.jsp");
 		}
 		if (actioncode.equals("investorprofile")) {
@@ -72,12 +72,12 @@ public class Investorcontroller extends HttpServlet {
 		}
 		if ("getallinvestorImage".equals(actioncode)) {
 			SessionFactory sessionfactory = Util.getSessionFactory();
-			Session session = sessionfactory.openSession();
+			Session session1 = sessionfactory.openSession();
 			id = Integer.parseInt(request.getParameter("id"));
 
 			byte[] imageBytes = null;
 
-			Investor investor = dao.getInvestorById1(session, id);
+			Investor investor = dao.getInvestorById1(session1, id);
 			imageBytes = investor.getlogo();
 
 			String format = request.getParameter("format"); // Get the format parameter (e.g., "jpg", "png")

@@ -87,7 +87,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">Email<font
 								color=red>*</font></label> <input type="text" class="form-control"
-								name="email" />
+								name="email" required />
 						</div>
 
 						<button type="submit" class="btn btn-theme-bg">Send</button>

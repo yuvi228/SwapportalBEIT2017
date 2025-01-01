@@ -50,43 +50,10 @@ Register reg = (Register) session.getAttribute("Userdata");
 
 <body background="<%=request.getContextPath()%>/Image/bg.jpg"
 	style="background-attachment: fixed;">
-	<div class="top-bar-dark">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8 text-right">
-					<ul class="list-inline top-dark-right">
-						<li><a href="#"><i class="fa fa-lock"></i> Welcome <%=reg.getUsername()%></a></li>
-						<li><a class="topbar-icons" href="#"><span><i
-									class="fa fa-search top-search"></i></span></a></li>
-					</ul>
-					<div class="search">
-						<form role="form">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Write something and press enter"> <span
-								class="search-close"><i class="fa fa-times"></i></span>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="navbar navbar-default navbar-static-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span><span class="icon-bar"></span><span
-						class="icon-bar"></span>
-				</button>
-				<img src="<%=request.getContextPath()%>/Image/swlogo.jpg"
-					style="width: 150px; margin: 0px auto;"
-					alt="A Social Online Platform for great ideas and Startups">
-				A Social Online Platform for great ideas and Startups
-			</div>
-		</div>
-	</div>
+	<jsp:include page="header.jsp"></jsp:include>
+
+
 
 	<div class="col-sm-3 margin40">
 		<ul class="list-unstyled side-nav">
@@ -101,7 +68,7 @@ Register reg = (Register) session.getAttribute("Userdata");
 	</div>
 
 	<div class="col-md-9" style="margin-top: 10px;">
-		<div class="panel panel-default">
+		<div>
 			<div class="panel-body profile"
 				style="background: url('assets/images/gallery/music-4.jpg') center center no-repeat;">
 
@@ -153,7 +120,7 @@ Register reg = (Register) session.getAttribute("Userdata");
 						<table style="border-style: solid;" width="100%" cellspacing="100">
 							<tr>
 								<td width="20%" align="right"><label
-									class="col-md-12 col-xs-12 control-label">Registered ID</label></td>
+									class="col-md-12 col-xs-12 control-label">User ID</label></td>
 								<td><label class="col-md-12 col-xs-12 control-label"><%=inv.getId()%></label></td>
 							</tr>
 							<tr>

@@ -68,74 +68,7 @@ label {
 </head>
 <body background="<%=request.getContextPath()%>/Image/bg.jpg"
 	style="background-attachment: fixed;">
-	<div class="top-bar-dark">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 hidden-xs">
-					<div class="top-bar-socials">
-						<a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-facebook">
-							<i class="fa fa-facebook"></i> <i class="fa fa-facebook"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-twitter">
-							<i class="fa fa-twitter"></i> <i class="fa fa-twitter"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-google-plus">
-							<i class="fa fa-google-plus"></i> <i class="fa fa-google-plus"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-linkedin">
-							<i class="fa fa-linkedin"></i> <i class="fa fa-linkedin"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-google-plus">
-							<i class="fa fa-youtube"></i> <i class="fa fa-youtube"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-dribbble">
-							<i class="fa fa-dribbble"></i> <i class="fa fa-dribbble"></i>
-						</a>
-					</div>
-				</div>
-				<div class="col-sm-8 text-right">
-					<ul class="list-inline top-dark-right">
-
-						<li><a href=""><i class="fa fa-lock"></i> Loggedin As <%=reg.getUsername()%></a></li>
-						<%--                             <li><a href="<%=request.getContextPath() %>/wp-content/Frontend/registration.jsp"><i class="fa fa-user"></i> Sign Up</a></li> --%>
-						<li><a class="topbar-icons" href="#"><span><i
-									class="fa fa-search top-search"></i></span></a></li>
-					</ul>
-					<div class="search">
-						<form role="form">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Write something and press enter"> <span
-								class="search-close"><i class="fa fa-times"></i></span>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--top-bar-dark end here-->
-	<div class="navbar navbar-default navbar-static-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<img src="<%=request.getContextPath()%>/Image/swlogo.jpg"
-					style="width: 150px; margin: 0px auto;"
-					alt="A Social Online Platform for great ideas and Startups">A
-				Social Online Platform for great ideas and Startups
-			</div>
-
-
-		</div>
-	</div>
-
-
-
-
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<div class="breadcrumb-wrap">
 		<div class="container">
@@ -288,7 +221,7 @@ label {
 		</div>
 	</div>
 	<div class="divide60"></div>
-	<jsp:include page="footer.jsp"></jsp:include>
+
 	<!--scripts and plugins -->
 	<!--must need plugin jquery-->
 	<script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>

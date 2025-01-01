@@ -10,6 +10,17 @@
 
 	</welcome-file-list>
 
+	<filter>
+		<filter-name>CacheControlFilter</filter-name>
+		<filter-class>com.controller.CacheControlFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CacheControlFilter</filter-name>
+		<url-pattern>/*</url-pattern>  <!-- Apply to all protected URLs -->
+	</filter-mapping>
+
+
 	<servlet>
 		<servlet-name>Authcontroller</servlet-name>
 		<servlet-class>com.controller.Authcontroller</servlet-class>

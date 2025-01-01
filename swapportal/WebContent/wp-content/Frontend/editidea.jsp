@@ -174,7 +174,7 @@ Post post = (Post) session.getAttribute("Idea");
 		</div>
 	</div>
 	<div class="divide60"></div>
-	<%--              <jsp:include page="footer.jsp"></jsp:include> --%>
+
 	<!--scripts and plugins -->
 	<!--must need plugin jquery-->
 	<script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>

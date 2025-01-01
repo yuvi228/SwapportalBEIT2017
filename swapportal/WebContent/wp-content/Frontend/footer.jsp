@@ -99,13 +99,7 @@ body {
 						<h3>About Swap Portal</h3>
 						<p>A Social Online Platform for great Ideas/Startups and for
 							Investors.</p>
-						<ul class="list-inline footer-social">
-							<li><a href="#" class="fa fa-facebook"></a></li>
-							<li><a href="#" class="fa fa-twitter"></a></li>
-							<li><a href="#" class="fa fa-google-plus"></a></li>
-							<li><a href="#" class="fa fa-pinterest"></a></li>
-							<li><a href="#" class="fa fa-linkedin"></a></li>
-						</ul>
+
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 margin30">
@@ -113,8 +107,9 @@ body {
 						<h3>Contact</h3>
 						<ul class="list-unstyled contact">
 							<li><p>
-									<strong><i class="fa fa-map-marker"></i> Address:</strong>
-									Ahmedabad- 380061, Gujarat
+									<strong><i class="fa fa-map-marker"></i> Address:</strong><a
+										href="https://maps.app.goo.gl/QkZCtbdZ59StTLPU8">
+										Ahmedabad- 380061, Gujarat </a>
 								</p></li>
 							<li><p>
 									<strong><i class="fa fa-envelope"></i> Mail Us:</strong> <a

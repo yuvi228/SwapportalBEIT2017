@@ -66,158 +66,101 @@
         <![endif]-->
 
 <style type="text/css">
+table tbody td {
+	color: black; /* Ensure the table content has black text */
+}
+
+table th {
+	color: white; /* Keep headers white for contrast */
+}
 </style>
+
 </head>
 <body background="<%=request.getContextPath()%>/Image/bg.jpg">
-	<div class="top-bar-dark">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 hidden-xs">
-					<div class="top-bar-socials">
-						<a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-facebook">
-							<i class="fa fa-facebook"></i> <i class="fa fa-facebook"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-twitter">
-							<i class="fa fa-twitter"></i> <i class="fa fa-twitter"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-google-plus">
-							<i class="fa fa-google-plus"></i> <i class="fa fa-google-plus"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-linkedin">
-							<i class="fa fa-linkedin"></i> <i class="fa fa-linkedin"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-google-plus">
-							<i class="fa fa-youtube"></i> <i class="fa fa-youtube"></i>
-						</a> <a href="#"
-							class="social-icon-sm si-dark si-gray-round si-colored-dribbble">
-							<i class="fa fa-dribbble"></i> <i class="fa fa-dribbble"></i>
-						</a>
-					</div>
-				</div>
-				<div class="col-sm-8 text-right">
-					<ul class="list-inline top-dark-right">
-
-						<li><a href=""><i class="fa fa-lock"></i> Welcome <%=regg.getUsername()%></a></li>
-
-						<li><a class="topbar-icons" href="#"><span><i
-									class="fa fa-search top-search"></i></span></a></li>
-					</ul>
-					<div class="search">
-						<form role="form">
-							<input type="text" class="form-control" autocomplete="off"
-								placeholder="Write something and press enter"> <span
-								class="search-close"><i class="fa fa-times"></i></span>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--top-bar-dark end here-->
-	<div class="navbar navbar-default navbar-static-top yamm sticky"
-		role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<img src="<%=request.getContextPath()%>/Image/swlogo.jpg"
-					style="width: 150px; margin: 0px auto;"
-					alt="A Social Online Platform for great ideas and Startups">A
-				Social Online Platform for great ideas and Startups
-			</div>
+	<jsp:include page="header.jsp"></jsp:include>
 
 
-		</div>
+	<div class="col-sm-3">
+		<ul class="list-unstyled side-nav">
+			<li><a
+				href="<%=request.getContextPath()%>/wp-content/Frontend/ideapersondashboard.jsp">
+					<i class="fa fa-dashboard"></i> Dashboard
+			</a></li>
+		</ul>
 	</div>
 
-
-
-
-	<div class="breadcrumb-wrap">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-					<h4>Idea Repository</h4>
-				</div>
-				<div class="col-sm-6 hidden-xs text-right">
-					<ol class="breadcrumb">
-						<li><a
-							href="<%=request.getContextPath()%>/wp-content/Frontend/ideapersondashboard.jsp">Dashboard</a></li>
-						<li>Idea Repository</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--breadcrumbs-->
-
-
-
-	<div class="container shortcodes">
+	<div class="container mt-4">
 		<div class="row">
 			<div class="col-sm-12">
-<!-- 				<h4 class="margin30">Idea Repository</h4> -->
-				<font color="black">
-					<table class="table table-condensed">
-						<thead>
-							<tr>
+				<!-- Table for Idea Repository -->
+				<h4 class="mb-4 text-center">Idea Repository</h4>
 
-								<th>PId</th>
-								<!-- 								<th>Id</th> -->
-								<th>Definition</th>
-								<th>Title</th>
-								<th>Keyword</th>
-								<th>Abstract</th>
-								<th>Description</th>
-								<th>Category</th>
-								<th>Status</th>
-								<th>Startdate</th>
-								<th>Edit</th>
-								<th>Delete</th>
-							</tr>
-						</thead>
-						<tbody>
-							<%
-							if (!ideaList.isEmpty() && ideaList != null) {
-								Iterator<Post> it = ideaList.iterator();
-								Post batchObj = null;
-								while (it.hasNext()) {
-									batchObj = (Post) it.next();
-							%>
-							<tr>
-								<td><%=batchObj.getPid()%></td>
-<%-- 								<td><%=batchObj.getId()%></td> --%>
-								<td><%=batchObj.getDefinition()%></td>
-								<td><%=batchObj.getTitle()%></td>
-								<td><%=batchObj.getKeyword()%></td>
-								<td><%=batchObj.getAbstrct()%></td>
-								<td><%=batchObj.getDescription()%></td>
-								<td><%=batchObj.getCategory()%></td>
-								<td><%=batchObj.getStatus()%></td>
-								<td><%=batchObj.getStartdate()%></td>
+				<table class="table table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>PId</th>
+							<th>Definition</th>
+							<th>Title</th>
+							<th>Keyword</th>
+							<th>Abstract</th>
+							<th>Description</th>
+							<th>Category</th>
+							<th>Status</th>
+							<th>Start Date</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+						if (ideaList != null && !ideaList.isEmpty()) {
+							Iterator<Post> it = ideaList.iterator();
+							Post batchObj = null;
+							while (it.hasNext()) {
+								batchObj = it.next();
+						%>
+						<tr>
+							<td><%=batchObj.getPid()%></td>
+							<td><%=batchObj.getDefinition()%></td>
+							<td><%=batchObj.getTitle()%></td>
+							<td><%=batchObj.getKeyword()%></td>
+							<td><%=batchObj.getAbstrct()%></td>
+							<td><%=batchObj.getDescription()%></td>
+							<td><%=batchObj.getCategory()%></td>
+							<td><%=batchObj.getStatus()%></td>
+							<td><%=batchObj.getStartdate()%></td>
 
-								<td><a
-									href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=updateIdea&pid=<%=batchObj.getPid()%>">Edit</a></td>
-								<td><a
-									href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=deleteIdea&pid=<%=batchObj.getPid()%>">Delete</a></td>
-							</tr>
-							<%
-							}
-							}
-							%>
-						</tbody>
-					</table>
-				</font>
+							<td>
+								<!-- Edit and Delete Icons side by side --> <a
+								href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=updateIdea&pid=<%=batchObj.getPid()%>"
+								class="btn btn-primary btn-sm mr-2 d-inline-block" title="Edit">
+									<i class="fa fa-edit"></i>
+							</a> <a
+								href="<%=request.getContextPath()%>/Ideapostcontroller?actionCode=deleteIdea&pid=<%=batchObj.getPid()%>"
+								class="btn btn-danger btn-sm d-inline-block" title="Delete"
+								onclick="return confirm('Are you sure you want to delete this idea?');">
+									<i class="fa fa-trash"></i>
+							</a>
+							</td>
+
+
+						</tr>
+						<%
+						}
+						}
+						%>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
 
-	<jsp:include page="footer.jsp"></jsp:include>
+	<!-- Adding Bootstrap JS and jQuery for better functionality (for modals, tooltips, etc.) -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 	<!--scripts and plugins -->
 	<!--must need plugin jquery-->
 	<script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
@@ -263,6 +206,7 @@
 		type="text/javascript"></script>
 	<script src="<%=request.getContextPath()%>/js/ideaperson.js"
 		type="text/javascript"></script>
+
 
 </body>
 

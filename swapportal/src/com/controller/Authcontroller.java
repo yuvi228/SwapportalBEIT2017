@@ -44,15 +44,24 @@ public class Authcontroller extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Into Auth Controller");
 
 		Integer id = null;
 		String actioncode = request.getParameter("actionCode");
-
-		HttpSession session = request.getSession();
-
 		final String basePath = request.getContextPath() + "/wp-content/Frontend/";
 
-		// Get all User data
+		HttpSession session = request.getSession(false);
+
+		if (actioncode.equals("logout")) {
+			session.invalidate();
+			// Add headers to prevent caching
+			response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+			response.setHeader("Pragma", "no-cache");
+			response.setDateHeader("Expires", 0);
+			response.sendRedirect(basePath + "userlogin.jsp");
+			return;
+		}
+
 		if (actioncode.equals("getalluser")) {
 			List<Register> alluser = dao.doloadRegister();
 			session.setAttribute("Registration", alluser);
@@ -127,6 +136,7 @@ public class Authcontroller extends HttpServlet {
 
 		// LOGIN START
 		if (actioncode.equals("addLogin")) {
+			System.out.println("Into AddLogin");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 
@@ -139,19 +149,20 @@ public class Authcontroller extends HttpServlet {
 
 			Register reg = dao.getRegisterUserIfAvailable(email, password);
 			if (reg != null) {
-				request.getSession(false).setAttribute("Userdetail", reg);
+				HttpSession session = request.getSession(true);
+				session.setAttribute("Userdetails", reg);
 
 				String userType = reg.getType();
 				if (userType.equals("Investor") && userType != null) {
 					List<Ideaperson> ideapersonList = ideapersondao.doloadIdeaperson();
-					request.getSession(false).setAttribute("Ideapersonlist", ideapersonList);
+					session.setAttribute("Ideapersonlist", ideapersonList);
 					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/investordashboard.jsp");
+
 				} else {
 					List<Investor> investorList = investordao.doloadInvestor();
-					request.getSession(false).setAttribute("Investorlist", investorList);
+					session.setAttribute("Investorlist", investorList);
 					response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/ideapersondashboard.jsp");
 				}
-
 			} else {
 				request.setAttribute("errorMessage", "Your account is not registered on Swapportal");
 				request.getRequestDispatcher("/wp-content/Frontend/userlogin.jsp").forward(request, response);

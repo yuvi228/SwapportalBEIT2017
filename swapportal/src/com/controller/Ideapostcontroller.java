@@ -25,7 +25,7 @@ public class Ideapostcontroller extends HttpServlet {
 		Integer id = null;
 		String actioncode = request.getParameter("actionCode");
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 
 		final String basePath = request.getContextPath() + "/wp-content/Frontend/";
 

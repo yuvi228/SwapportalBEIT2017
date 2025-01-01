@@ -34,10 +34,16 @@ public class Ideapersoncontroller extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		// Add headers to prevent caching of protected pages
+		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
+
 		Integer id = null;
 		String actioncode = request.getParameter("actionCode");
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 
 		final String basePath = request.getContextPath() + "/wp-content/Frontend/";
 
@@ -149,7 +155,7 @@ public class Ideapersoncontroller extends HttpServlet {
 			String expfund = request.getParameter("funding");
 
 			List<Ideaperson> list = dao.getsearch(city, expfund);
-			request.getSession(false).setAttribute("search", list);
+			request.getSession(false).setAttribute("Ideapersondetails", list);
 			response.sendRedirect(request.getContextPath() + "/wp-content/Frontend/sresult.jsp");
 
 		}

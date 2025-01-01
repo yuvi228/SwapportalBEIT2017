@@ -109,17 +109,7 @@
 								<div class="caption text sfl" data-x="50" data-y="290"
 									data-speed="1000" data-start="1800" data-easing="easeOutExpo">
 
-								</div> <!--                         <div class="caption sfb rev-buttons tp-resizeme" -->
-								<!--                              data-x="50" --> <!--                              data-y="360" -->
-								<!--                              data-speed="500" --> <!--                              data-start="1800" -->
-								<!--                              data-easing="Sine.easeOut"> -->
-								<!--                             <a href="#" class="btn btn-theme-bg btn-lg">Purchase Now</a> -->
-								<!--                         </div> --> <!--                         <div class="caption sfb rev-buttons tp-resizeme" -->
-								<!--                              data-x="250" --> <!--                              data-y="360" -->
-								<!--                              data-speed="500" --> <!--                              data-start="2100" -->
-								<!--                              data-easing="Sine.easeOut"> -->
-								<!--                             <a href="#" class="btn border-white btn-lg">View features</a> -->
-								<!--                         </div> -->
+								</div>
 
 							</li>
 							<!-- SLIDE -->

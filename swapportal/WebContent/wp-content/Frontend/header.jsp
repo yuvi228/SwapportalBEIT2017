@@ -1,8 +1,21 @@
-<%@ page import="com.util.Filepath"%>
 
+<%@page import="com.model.Register"%>
+<%
+// Retrieve the logged-in user details
+Register regi = (Register) session.getAttribute("Userdetails");
+String homepageUrl = null;
+if (regi != null) {
+	if ("Investor".equals(regi.getType())) {
+		homepageUrl = "/wp-content/Frontend/investordashboard.jsp";
+	} else if ("IdeaPerson".equals(regi.getType())) {
+		homepageUrl = "/wp-content/Frontend/ideapersondashboard.jsp";
+	}
+%>
 <div class="navbar navbar-default navbar-static-top yamm sticky"
 	role="navigation">
 	<div class="container">
+
+
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse">
@@ -11,18 +24,37 @@
 					class="icon-bar"></span>
 			</button>
 
-			<a href="<%=request.getContextPath()%>/wp-content/Frontend/index.jsp">
-				<img src="<%=request.getContextPath()%>/Image/swlogo.jpg"
+			<a href="<%=request.getContextPath()%><%=homepageUrl%>"> <img
+				src="<%=request.getContextPath()%>/Image/swlogo.jpg"
 				class="navbar-logo"
 				alt="A Social Online Platform for great ideas and Startups">
 			</a> <span class="navbar-tagline">Bridging Ideas with Investment,
 				Empowering Innovators.</span>
 		</div>
 
+		<%
+		} else {
+		homepageUrl = "/wp-content/Frontend/index.jsp";
+		%>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+
+			<a href="<%=request.getContextPath()%><%=homepageUrl%>"> <img
+				src="<%=request.getContextPath()%>/Image/swlogo.jpg"
+				class="navbar-logo"
+				alt="A Social Online Platform for great ideas and Startups">
+			</a> <span class="navbar-tagline">Bridging Ideas with Investment,
+				Empowering Innovators.</span>
+		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a
-					href="<%=request.getContextPath()%>/wp-content/Frontend/index.jsp">Home</a></li>
+				<li><a href="<%=request.getContextPath()%><%=homepageUrl%>">Home</a>
+				</li>
 				<li><a
 					href="<%=request.getContextPath()%>/wp-content/Frontend/investor.jsp">Investor</a></li>
 				<li><a
@@ -31,11 +63,15 @@
 					href="<%=request.getContextPath()%>/wp-content/Frontend/faq.jsp">FAQ</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/wp-content/Frontend/userlogin.jsp">Login</a></li>
-				<li><a
-					href="<%=request.getContextPath()%>/wp-content/Frontend/admin.jsp">Admin
-						Panel</a></li>
+				<!-- 				<li><a -->
+				<%-- 					href="<%=request.getContextPath()%>/wp-content/Frontend/admin.jsp">Admin --%>
+				<!-- 						Panel</a></li> -->
 			</ul>
 		</div>
+		<%
+		}
+		%>
+
 	</div>
 </div>
 
@@ -50,8 +86,7 @@
 
 .navbar-logo {
 	width: 150px;
-	margin: 0 10px;
-	vertical-align: middle;
+	max-height: 100px;
 }
 
 .navbar-tagline {
